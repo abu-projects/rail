@@ -1,0 +1,43 @@
+{
+  "mesh_objects": 22,
+  "triangles": 47984,
+  "vertices": 32076,
+  "bbox_m_blender": {
+    "min": [
+      -0.8809999824,
+      -0.2444274724,
+      0
+    ],
+    "max": [
+      0.8809999824,
+      0.2444274724,
+      1.0099999905
+    ]
+  },
+  "reimport": "PASS: deliverable GLB imported successfully with all geometry and 10 PBR materials",
+  "images": 0,
+  "external_resources": 0,
+  "geometry_is_3d": true,
+  "wheelbase_m": 1.048,
+  "assumed_tire_diameter_m": 0.714,
+  "assumed_hood_width_m": 0.42,
+  "assumed_drop_outside_width_m": 0.49,
+  "origin": "Ground under axle midpoint",
+  "Blender_axes": "+X forward, +Z up, drivetrain -Y",
+  "GLB_axes": "+X forward, +Y up, drivetrain +Z",
+  "bbox_m_gltf": {
+    "min": [
+      -0.8809999824,
+      0,
+      -0.2444274724
+    ],
+    "max": [
+      0.8809999824,
+      1.0099999905,
+      0.2444274724
+    ]
+  },
+  "bbox_method": "Exact transformed GLB vertex positions, independently verified",
+  "material_primitives": 42,
+  "gltf_nodes": 25
+}

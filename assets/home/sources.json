@@ -1,0 +1,157 @@
+{
+  "hero-lineup": {
+    "source": "imgs/Home/Rail_2025__LineUp_-59.jpg",
+    "size": [
+      4898,
+      3265
+    ],
+    "widths": [
+      800,
+      1200,
+      1600,
+      2000
+    ]
+  },
+  "hero-detail": {
+    "source": "imgs/Home/Rail_2025__LineUp_-86.jpg",
+    "size": [
+      4898,
+      3265
+    ],
+    "widths": [
+      800,
+      1200,
+      1600,
+      2000
+    ]
+  },
+  "hero-lopper": {
+    "source": "imgs/Home/Lopper.jpg",
+    "size": [
+      4898,
+      3265
+    ],
+    "widths": [
+      800,
+      1200,
+      1600,
+      2000
+    ]
+  },
+  "hero-mobile": {
+    "source": "imgs/Home/Rail_2025__LineUp_-84.jpg",
+    "size": [
+      3265,
+      4898
+    ],
+    "widths": [
+      480,
+      800
+    ]
+  },
+  "hero-detail-mobile": {
+    "source": "imgs/Home/Rail_2025__LineUp_-89.jpg",
+    "size": [
+      3265,
+      4898
+    ],
+    "widths": [
+      480,
+      800
+    ]
+  },
+  "hero-lopper-mobile": {
+    "source": "imgs/Home/Rail_2025__LineUp_-77.jpg",
+    "size": [
+      3265,
+      4898
+    ],
+    "widths": [
+      480,
+      800
+    ]
+  },
+  "muetterschwandenberg": {
+    "source": "imgs/Rubrik Modelle/Modell Mutterschwandenberg Fully.jpg",
+    "size": [
+      3265,
+      4898
+    ],
+    "widths": [
+      480,
+      800,
+      1200
+    ]
+  },
+  "truischjanid": {
+    "source": "imgs/Rubrik Modelle/Modell Truise Enduro Hardtail.jpg",
+    "size": [
+      3265,
+      4898
+    ],
+    "widths": [
+      480,
+      800,
+      1200
+    ]
+  },
+  "wichelsee": {
+    "source": "imgs/Rubrik Modelle/Modell Wichselsee Gravel.jpg",
+    "size": [
+      3266,
+      4898
+    ],
+    "widths": [
+      480,
+      800,
+      1200
+    ]
+  },
+  "lopper": {
+    "source": "imgs/Rubrik Modelle/Modell Lopper Fully.jpg",
+    "size": [
+      3265,
+      4898
+    ],
+    "widths": [
+      480,
+      800,
+      1200
+    ]
+  },
+  "workshop": {
+    "source": "imgs/Rubrik Werkstatt/TruschJaNid_2022_-100.jpg",
+    "size": [
+      4898,
+      3265
+    ],
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "workshop-detail": {
+    "source": "imgs/Rubrik Werkstatt/TruschJaNid_2022_-8.jpg",
+    "size": [
+      4898,
+      3265
+    ],
+    "widths": [
+      480,
+      800
+    ]
+  },
+  "samuel": {
+    "source": "imgs/Rubrik über mich/Rail_2025__LineUp_-90.jpg",
+    "size": [
+      3265,
+      4898
+    ],
+    "widths": [
+      480,
+      800,
+      1200
+    ]
+  }
+}

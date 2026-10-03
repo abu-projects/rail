@@ -1,0 +1,131 @@
+{
+  "asset": "RAIL Wichelsee v2 PBR micro surfaces",
+  "version": 1,
+  "notes": [
+    "All map pixels are procedurally generated. Dimensions, surface construction and colors are visual approximations from the user-provided reference views.",
+    "Assign basecolor textures as sRGB. Normal, roughness and ORM textures must be linear/non-color.",
+    "Packed ORM channels: R=255 (neutral AO), G=roughness, B=0 (nonmetal). Do not use red as roughness.",
+    "For glTF metallicRoughnessTexture use ORM and roughnessFactor=1; metallicFactor=0. With basecolor texture use white baseColorFactor unless deliberately tinting.",
+    "OpenGL tangent normals can use strength 1. Avoid converting to DirectX. Use repeat wrapping and mipmapped anisotropic filtering.",
+    "No large baked wrinkles, shadows, seams or fabricated logos are included. These micro textures complement modeled macro geometry.",
+    "Use the PBR preview only for material inspection, never as a material map."
+  ],
+  "materials": [
+    {
+      "name": "nylon_black",
+      "size_px": [
+        1024,
+        1024
+      ],
+      "physical_tile_mm": [
+        64,
+        64
+      ],
+      "basecolor_srgb_hex": "#222527",
+      "roughness_mean": 0.8492162227630615,
+      "roughness_range": [
+        0.7990836501121521,
+        0.8999999761581421
+      ],
+      "metalness": 0,
+      "normal_convention": "OpenGL/glTF tangent space (+Y), linear data",
+      "normal_scale": 1.0,
+      "estimated_height_span_mm": 0.03430201858282089,
+      "repeat_wrap": "REPEAT on S and T",
+      "files": {
+        "basecolor": "nylon_black_basecolor.png",
+        "normal": "nylon_black_normal.png",
+        "roughness": "nylon_black_roughness.png",
+        "orm": "nylon_black_orm.png"
+      },
+      "usage": "Black woven nylon bag panels. A 500 x 120 mm panel uses about 7.81 x 1.88 UV repeats. Keep the warp parallel to panel length. Mesh folds, seams, piping, straps and zipper should remain separate geometry. Yarn spacing and relief are visual estimates."
+    },
+    {
+      "name": "rubber_black",
+      "size_px": [
+        1024,
+        1024
+      ],
+      "physical_tile_mm": [
+        40,
+        40
+      ],
+      "basecolor_srgb_hex": "#1b1d1d",
+      "roughness_mean": 0.8049981594085693,
+      "roughness_range": [
+        0.75,
+        0.8500000238418579
+      ],
+      "metalness": 0,
+      "normal_convention": "OpenGL/glTF tangent space (+Y), linear data",
+      "normal_scale": 1.0,
+      "estimated_height_span_mm": 0.03557749092578888,
+      "repeat_wrap": "REPEAT on S and T",
+      "files": {
+        "basecolor": "rubber_black_basecolor.png",
+        "normal": "rubber_black_normal.png",
+        "roughness": "rubber_black_roughness.png",
+        "orm": "rubber_black_orm.png"
+      },
+      "usage": "Black gravel tire tread/rubber micro finish. Repeat at roughly 40 mm per tile; a 700C tread circumference is roughly 54-56 repeats. This map does not assert a tread brand or replace tread-block geometry. Rotate U to follow circumference. Sidewalls can share it at reduced normal scale 0.35."
+    },
+    {
+      "name": "tape_dark_chocolate",
+      "size_px": [
+        1024,
+        1024
+      ],
+      "physical_tile_mm": [
+        40,
+        40
+      ],
+      "basecolor_srgb_hex": "#4d3631",
+      "roughness_mean": 0.7350007891654968,
+      "roughness_range": [
+        0.6700000166893005,
+        0.800000011920929
+      ],
+      "metalness": 0,
+      "normal_convention": "OpenGL/glTF tangent space (+Y), linear data",
+      "normal_scale": 1.0,
+      "estimated_height_span_mm": 0.07650583982467651,
+      "repeat_wrap": "REPEAT on S and T",
+      "files": {
+        "basecolor": "tape_dark_chocolate_basecolor.png",
+        "normal": "tape_dark_chocolate_normal.png",
+        "roughness": "tape_dark_chocolate_roughness.png",
+        "orm": "tape_dark_chocolate_orm.png"
+      },
+      "usage": "Dark chocolate handlebar wrap. Use roughly 40 mm physical tile size; 24 mm tape width spans 0.6 UV units. For continuous bar UVs, scale U along wrapped bar length and V around its circumference. Layer seams should come from winding geometry, not this map."
+    },
+    {
+      "name": "enamel_sage",
+      "size_px": [
+        1024,
+        1024
+      ],
+      "physical_tile_mm": [
+        60,
+        60
+      ],
+      "basecolor_srgb_hex": "#58765f",
+      "roughness_mean": 0.3149999976158142,
+      "roughness_range": [
+        0.29509875178337097,
+        0.33393755555152893
+      ],
+      "metalness": 0,
+      "normal_convention": "OpenGL/glTF tangent space (+Y), linear data",
+      "normal_scale": 1.0,
+      "estimated_height_span_mm": 0.006635308265686035,
+      "repeat_wrap": "REPEAT on S and T",
+      "files": {
+        "basecolor": "enamel_sage_basecolor.png",
+        "normal": "enamel_sage_normal.png",
+        "roughness": "enamel_sage_roughness.png",
+        "orm": "enamel_sage_orm.png"
+      },
+      "usage": "Sage painted frame tubes; 60 mm per tile. Colour is an approximate albedo inferred from the provided photographs, not a colour-managed swatch. Optional clearcoat 0.15-0.25, clearcoat roughness 0.2-0.3; base metalness stays zero for opaque paint. Normal scale 0.35-1.0, depending on shot distance."
+    }
+  ]
+}

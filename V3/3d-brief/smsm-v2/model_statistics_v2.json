@@ -1,0 +1,40 @@
+{
+  "version": "visual_v2",
+  "status": "Reference-based visual approximation; not exact OEM CAD or final reconstruction",
+  "source_meshes": 319,
+  "source_triangles": 146224,
+  "gltf_meshes": 24,
+  "gltf_nodes": 27,
+  "gltf_primitives": 52,
+  "triangles": 146224,
+  "embedded_images": 12,
+  "web_texture_resolution": 512,
+  "source_texture_resolution": 1024,
+  "materials": 12,
+  "external_resources": [],
+  "glb_bytes": 8455240,
+  "blend_bytes": 14093300,
+  "exact_bounds_blender": {
+    "min": [
+      -0.8810000419616699,
+      -0.24819999933242798,
+      0.0
+    ],
+    "max": [
+      0.8810000419616699,
+      0.24819999933242798,
+      1.0017884969711304
+    ]
+  },
+  "reimport": "PASS: entire deliverable GLB successfully imported after deleting all original bicycle geometry",
+  "browser_test": "Cloud browser could not open the local viewer (ERR_BLOCKED_BY_CLIENT). No v2 browser performance claim. Viewer included for local testing.",
+  "tire_outer_diameter_m_assumed": 0.714,
+  "wheelbase_m_inferred": 1.048,
+  "hood_width_m_inferred": 0.42,
+  "Blender_axes": "+X forward, +Z up, drivetrain -Y",
+  "GLB_axes": "+X forward, +Y up, drivetrain +Z",
+  "origin": "Ground below axle midpoint",
+  "five_angle_reimport_renders": "PASS",
+  "independent_structural_validation": "PASS: finite attributes, in-range indices, valid embedded PNG maps and centered identity-child wheel pivots",
+  "gltf_sha256": "ae4be4ecc13f8e4373a0d32dc9abc3ecfcbdc10117afe028a1a813caa51493dc"
+}
