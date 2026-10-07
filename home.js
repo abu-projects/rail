@@ -47,10 +47,10 @@
     window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
     header.querySelector('.brand').focus({ preventScroll: true });
   });
-  const enquiry = document.querySelector('[data-enquiry]');
+  const enquiry = document.querySelector('[data-contact-form]');
   if (enquiry) {
     const models = new Map([
-      ['muetterschwandenberg', 'Muetterschwandenberg'], ['truischjanid', 'Truischjanid'],
+      ['muetterschwandenberg', 'Muetterschwandeberg'], ['truischjanid', 'Truischjanid'],
       ['wichelsee', 'Wichelsee'], ['lopper', 'Lopper']
     ]);
     const slug = new URLSearchParams(location.search).get('model');
@@ -58,7 +58,6 @@
       const model = models.get(slug);
       const modelSelect = document.querySelector('#contact-model');
       if (modelSelect) modelSelect.value = slug;
-      enquiry.href = `mailto:sam@railcycles.ch?subject=${encodeURIComponent(`${english ? 'Enquiry' : 'Anfrage'}: RAIL ${model}`)}`;
       const note = document.querySelector('.selected-model');
       note.textContent = `${english ? 'Your enquiry' : 'Deine Anfrage'}: ${model}`;
       note.hidden = false;
@@ -102,13 +101,31 @@
     copyButton.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(draft);
-        status.textContent = english ? 'Message copied. Paste it into an email to sam@railcycles.ch.' : 'Nachricht kopiert. Füge sie in eine E-Mail an sam@railcycles.ch ein.';
+        status.textContent = english ? 'Message copied. Open your email application using the link above.' : 'Nachricht kopiert. Öffne dein E-Mail-Programm über den Link oben.';
       } catch {
         prepared.hidden = false;
         prepared.focus();
         prepared.select();
-        status.textContent = english ? 'Copy the message below and email it to sam@railcycles.ch.' : 'Kopiere die Nachricht unten und sende sie per E-Mail an sam@railcycles.ch.';
+        status.textContent = english ? 'Copy the message below and open your email application using the link above.' : 'Kopiere die Nachricht unten und öffne dein E-Mail-Programm über den Link oben.';
       }
+    });
+  }
+  const photoDialog = document.querySelector('.photo-dialog');
+  if (photoDialog && typeof photoDialog.showModal === 'function') {
+    document.querySelectorAll('[data-photo]').forEach(link => {
+      link.addEventListener('click', event => {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        photoDialog.querySelector('[data-dialog-photo]').src = link.href;
+        photoDialog.querySelector('#photo-title').textContent = link.dataset.photoTitle;
+        photoDialog.showModal();
+      });
+    });
+    photoDialog.querySelector('[data-close-photo]').addEventListener('click', () => photoDialog.close());
+    photoDialog.addEventListener('click', event => {
+      if (event.target !== photoDialog) return;
+      const bounds = photoDialog.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) photoDialog.close();
     });
   }
   const hero = document.querySelector('.hero');

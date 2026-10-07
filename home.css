@@ -210,12 +210,12 @@ html:not(.js) .site-header{position:sticky;background:var(--bg)}
 @media(max-width:360px){.site-header .brand img{width:116px}.header-inner{gap:8px}}
 
 /* Homepage previews and email enquiry composer. */
-.featured-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.featured-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
 .featured-photo{display:block;overflow:hidden;background:var(--surface)}
 .featured-photo img{width:100%;aspect-ratio:3265/4898;object-fit:cover;transition:transform .6s}
 .featured-photo:hover img{transform:scale(1.025)}
 .featured-model>.eyebrow{margin-block:24px 10px;color:var(--muted)}
-.featured-model h3{font-size:clamp(22px,2.15vw,31px);letter-spacing:0}
+.featured-model h3{font-size:clamp(18px,1.6vw,25px);letter-spacing:0;overflow-wrap:anywhere}
 .featured-model>.text-link{margin-top:16px;border-top:1px solid var(--rule);width:100%;padding-top:12px}
 .section-view{margin-top:48px;text-align:center}
 .home-workshop{background:var(--surface)}
@@ -250,3 +250,30 @@ html:not(.js) .site-header{position:sticky;background:var(--bg)}
 @media(max-width:767px){.featured-grid{grid-template-columns:1fr;gap:40px}.featured-model h3{font-size:clamp(24px,6.2vw,36px)}.section-view{margin-top:36px}.home-story,.home-about{grid-template-columns:1fr;gap:36px}.home-about .home-story-copy{padding:0}.home-about figure{grid-row:1}.home-story-copy>p:not(.eyebrow){margin-top:20px}.home-story-copy>.button{margin-top:24px}.contact-form-section{grid-template-columns:1fr;gap:32px;padding-block:48px 64px}.form-heading>p:not(.eyebrow){max-width:none}.form-heading .form-delivery-note{margin-top:20px}.form-result{padding:18px}}
 
 .contact-form button:disabled { opacity: .45; cursor: not-allowed; }
+
+/* Client feedback: frame details, trail photographs and local photo viewer. */
+.family-intro{padding-bottom:56px;max-width:1000px}
+.family-intro>.eyebrow{margin-bottom:20px}
+.family-intro>p:not(.eyebrow){color:var(--muted);line-height:1.7}
+.price-note{font-size:14px;color:var(--muted);margin-top:18px}
+.model-specs{padding-left:20px;margin-top:28px;color:var(--muted);line-height:1.7}
+.model-specs li+li{margin-top:10px}
+.model-detail-copy .model-warning{font-weight:600;color:var(--text);margin-top:24px}
+.model-detail-copy .model-price{color:var(--text);font-size:24px;margin-top:24px}
+.model-detail-copy .price-note{font-size:14px;margin-top:12px}
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.action-grid figure:first-child{grid-column:1/-1}
+.action-grid img{width:100%;height:auto;display:block}
+.footer-social a{display:flex;align-items:center;justify-content:space-between;min-height:44px;border-bottom:1px solid var(--rule);font-size:15px}
+.footer-social>.eyebrow{margin-bottom:14px}
+.photo-dialog{width:min(900px,calc(100% - 32px));max-height:90svh;margin:auto;padding:24px;color:var(--text);background:var(--surface);border:1px solid var(--rule);overflow:auto}
+.photo-dialog::backdrop{background:#000c}
+.photo-dialog-heading{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:20px}
+.photo-dialog-heading h2{font-size:28px}
+.photo-dialog-heading button{background:transparent;border:1px solid var(--rule);padding:8px 16px;min-height:44px;font:inherit;color:inherit}
+.photo-dialog img{max-height:70svh;width:100%;object-fit:contain}
+@media(min-width:768px) and (max-width:1023px){.featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.featured-model h3{font-size:28px}}
+@media(max-width:767px){.action-grid{grid-template-columns:1fr;gap:20px}.family-intro{padding-bottom:36px}.photo-dialog{padding:16px}.photo-dialog-heading h2{font-size:24px}}
+
+/* Logo artwork replaces platform-dependent arrow glyphs. */
+.rail-mark{display:block;width:24px;height:24px;flex:0 0 24px;color:inherit}
