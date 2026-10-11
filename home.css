@@ -211,12 +211,15 @@ html:not(.js) .site-header{position:sticky;background:var(--bg)}
 
 /* Homepage previews and email enquiry composer. */
 .featured-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.featured-model{display:flex;flex-direction:column;min-width:0}
 .featured-photo{display:block;overflow:hidden;background:var(--surface)}
-.featured-photo img{width:100%;aspect-ratio:3265/4898;object-fit:cover;transition:transform .6s}
+.featured-photo img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 40%;transition:transform .6s}
+/* The green bike sits lower in its original photograph; align the wheel baseline. */
+.featured-photo--muetterschwandenberg img{object-position:50% 100%}
 .featured-photo:hover img{transform:scale(1.025)}
 .featured-model>.eyebrow{margin-block:24px 10px;color:var(--muted)}
-.featured-model h3{font-size:clamp(18px,1.6vw,25px);letter-spacing:0;overflow-wrap:anywhere}
-.featured-model>.text-link{margin-top:16px;border-top:1px solid var(--rule);width:100%;padding-top:12px}
+.featured-model h3{font-size:clamp(18px,1.6vw,25px);letter-spacing:0;overflow-wrap:anywhere;margin-bottom:16px}
+.featured-model>.text-link{margin-top:auto;border-top:1px solid var(--rule);width:100%;padding-top:12px;gap:12px;min-height:56px;flex-shrink:0}
 .section-view{margin-top:48px;text-align:center}
 .home-workshop{background:var(--surface)}
 .home-story{display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:80px}
@@ -264,7 +267,10 @@ html:not(.js) .site-header{position:sticky;background:var(--bg)}
 .action-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .action-grid figure:first-child{grid-column:1/-1}
 .action-grid img{width:100%;height:auto;display:block}
-.footer-social a{display:flex;align-items:center;justify-content:space-between;min-height:44px;border-bottom:1px solid var(--rule);font-size:15px}
+.social-links{display:flex;flex-wrap:wrap;gap:12px}
+.footer-social .social-links a{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border:1px solid var(--rule);color:var(--text);transition:background .2s,color .2s}
+.footer-social .social-links a:hover{background:var(--text);color:var(--bg)}
+.social-icon{display:block;width:24px;height:24px;flex-shrink:0}
 .footer-social>.eyebrow{margin-bottom:14px}
 .photo-dialog{width:min(900px,calc(100% - 32px));max-height:90svh;margin:auto;padding:24px;color:var(--text);background:var(--surface);border:1px solid var(--rule);overflow:auto}
 .photo-dialog::backdrop{background:#000c}
@@ -275,5 +281,9 @@ html:not(.js) .site-header{position:sticky;background:var(--bg)}
 @media(min-width:768px) and (max-width:1023px){.featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.featured-model h3{font-size:28px}}
 @media(max-width:767px){.action-grid{grid-template-columns:1fr;gap:20px}.family-intro{padding-bottom:36px}.photo-dialog{padding:16px}.photo-dialog-heading h2{font-size:24px}}
 
-/* Logo artwork replaces platform-dependent arrow glyphs. */
-.rail-mark{display:block;width:24px;height:24px;flex:0 0 24px;color:inherit}
+/* Solar SVGs use a light tile to keep the requested black arrows visible. */
+.nav-arrow{display:block;width:32px;height:32px;flex:0 0 32px;padding:5px;background:var(--text);color:#000}
+.nav-arrow--right path{transform:rotate(45deg);transform-origin:12px 12px}
+.nav-arrow--left path{transform:rotate(225deg);transform-origin:12px 12px}
+.nav-arrow--up path{transform:rotate(-45deg);transform-origin:12px 12px}
+.button-light .nav-arrow{background:transparent}

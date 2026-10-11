@@ -1,10 +1,17 @@
 """Generate the bilingual static RAIL site. Run from any working directory."""
 from pathlib import Path
 from html import escape
+from hashlib import sha256
 
 ROOT = Path(__file__).resolve().parents[1]
-# The distinctive symbol is extracted unchanged from the RAIL logo.
-RAIL_MARK = (ROOT / "assets/rail-mark.svg").read_text().strip()
+CSS_VERSION = sha256((ROOT / "home.css").read_bytes()).hexdigest()[:12]
+# Embed a local Solar SVG so navigation arrows render identically on every host.
+NAV_ARROW = (ROOT / "assets/icons/solar-arrow-right-up.svg").read_text().strip()
+SOCIAL_ICONS = {name: (ROOT / f"assets/icons/{name}.svg").read_text().strip()
+                for name in ("instagram", "facebook", "x", "tiktok")}
+
+def directional_arrow(direction):
+ return NAV_ARROW.replace('class="nav-arrow"', f'class="nav-arrow nav-arrow--{direction}"')
 ROUTES = {
     'de': {'home':'index.html', 'models':'modelle.html', 'workshop':'werkstatt.html', 'about':'ueber-mich.html', 'contact':'kontakt.html', 'legal':'impressum.html', 'privacy':'datenschutz.html'},
     'en': {'home':'index.html', 'models':'models.html', 'workshop':'workshop.html', 'about':'about.html', 'contact':'contact.html', 'legal':'legal-notice.html', 'privacy':'privacy.html'},
@@ -119,14 +126,14 @@ def make_site(lang):
  out.mkdir(exist_ok=True)
  def asset(path): return prefix + path
  def route(key): return ROUTES[lang][key]
- def image(name, alt, cls='', eager=False):
+ def image(name, alt, cls='', eager=False, sizes='(max-width: 767px) calc(100vw - 40px), 50vw'):
   widths = [800,1200,1600] if name == 'workshop' else [480,800] if name == 'workshop-detail' else [480,800,1200]
   w = 1200 if name == 'workshop' else 800
   dims = 'width="4898" height="3265"' if name == 'workshop' else 'width="3265" height="4898"'
   srcset = ', '.join(f'{asset(f"assets/home/{name}-{n}.webp")} {n}w' for n in widths)
-  return f'<img class="{cls}" src="{asset(f"assets/home/{name}-{w}.webp")}" srcset="{srcset}" sizes="(max-width: 767px) calc(100vw - 40px), 50vw" {dims} loading="{"eager" if eager else "lazy"}" alt="{escape(alt)}">'
+  return f'<img class="{cls}" src="{asset(f"assets/home/{name}-{w}.webp")}" srcset="{srcset}" sizes="{sizes}" {dims} loading="{"eager" if eager else "lazy"}" alt="{escape(alt)}">'
  def link(label, href, cls='text-link'):
-  return f'<a class="{cls}" href="{href}">{label} {RAIL_MARK}</a>'
+  return f'<a class="{cls}" href="{href}">{label} {NAV_ARROW}</a>'
  def contact_strip():
   return f'<section class="contact"><div class="contact-inner wrap"><div><p class="eyebrow">{c["talk"]}</p><h2>{c["contact_title"]}</h2></div>{link(c["get_contact"],route("contact"),"button button-outline")}</div></section>'
  def heading(label, title, intro=''):
@@ -140,19 +147,20 @@ def make_site(lang):
   languages = f'<nav class="language-bar" aria-label="{c["language"]}"><a href="{de_link}" lang="de" hreflang="de-CH" {"aria-current=page" if lang=="de" else ""} aria-label="Deutsch">DE</a><span aria-hidden="true">/</span><a href="{en_link}" lang="en" hreflang="en" {"aria-current=page" if lang=="en" else ""} aria-label="English">EN</a></nav>'
   brand = f'<a class="brand" href="{route("home")}" aria-label="RAIL Cycles – {c["home"]}"><img src="{asset("assets/rail-transparent.svg")}" width="188" height="50" alt="RAIL"></a>'
   header = f'<header class="site-header" id="start"><div class="header-inner wrap">{brand}<nav class="main-nav" id="hauptnavigation" aria-label="{c["navigation"]}">{nav}</nav>{languages}<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="hauptnavigation" aria-label="{c["open_menu"]}" hidden><span>{c["menu"]}</span><span class="menu-icon" aria-hidden="true"></span></button></div></header>'
-  social=''.join(f'<a href="{asset(f"assets/feedback/social-{i}.webp")}" data-photo data-photo-title="{name}"><span>{name}</span>{RAIL_MARK}</a>' for i,name in enumerate(['Instagram','Facebook','X','Tiktok'],1))
-  footer = f'<footer class="site-footer"><div class="footer-main wrap"><div>{brand}<p class="footer-tagline">HAND GMACHT</p><p>{c["location"]}</p></div><nav class="footer-nav" aria-label="{c["navigation"]}">{nav}</nav><div class="footer-social"><p class="eyebrow">Follow me on:</p>{social}</div></div><div class="footer-bottom wrap"><span>© 2026 RAIL Cycles</span><nav class="legal-nav" aria-label="{c["legal_nav"]}"><a href="{route("legal")}">{c["legal"]}</a><a href="{route("privacy")}">{c["privacy"]}</a></nav><a href="#start" data-back-top>{c["top"]} <span aria-hidden="true">↑</span></a></div></footer><dialog class="photo-dialog" aria-labelledby="photo-title"><div class="photo-dialog-heading"><h2 id="photo-title"></h2><button type="button" data-close-photo>{c["close"]} ×</button></div><img data-dialog-photo alt="{c["photo_alt"]}"></dialog>'
+  social='<div class="social-links">'+''.join(f'<a href="{asset(f"assets/feedback/social-{i}.webp")}" data-photo data-photo-title="{name}" aria-label="{name}" title="{name}">{SOCIAL_ICONS[name.lower()]}</a>' for i,name in enumerate(['Instagram','Facebook','X','TikTok'],1))+'</div>'
+  footer = f'<footer class="site-footer"><div class="footer-main wrap"><div>{brand}<p class="footer-tagline">HAND GMACHT</p><p>{c["location"]}</p></div><nav class="footer-nav" aria-label="{c["navigation"]}">{nav}</nav><div class="footer-social"><p class="eyebrow">Follow me on:</p>{social}</div></div><div class="footer-bottom wrap"><span>© 2026 RAIL Cycles</span><nav class="legal-nav" aria-label="{c["legal_nav"]}"><a href="{route("legal")}">{c["legal"]}</a><a href="{route("privacy")}">{c["privacy"]}</a></nav><a href="#start" data-back-top>{c["top"]} {directional_arrow('up')}</a></div></footer><dialog class="photo-dialog" aria-labelledby="photo-title"><div class="photo-dialog-heading"><h2 id="photo-title"></h2><button type="button" data-close-photo>{c["close"]} ×</button></div><img data-dialog-photo alt="{c["photo_alt"]}"></dialog>'
 
 
   if page == 'home':
-   hero = (ROOT/'scripts/templates/home-hero.html').read_text().replace('{{RAIL_MARK}}', RAIL_MARK).replace('href="#modelle"',f'href="{route("models")}"')
+   hero = (ROOT/'scripts/templates/home-hero.html').read_text().replace('{{NAV_ARROW}}', NAV_ARROW).replace('{{ARROW_LEFT}}', directional_arrow('left')).replace('{{ARROW_RIGHT}}', directional_arrow('right')).replace('href="#modelle"',f'href="{route("models")}"')
    hero = hero.replace('class="scroll-link" href="'+route('models')+'"','class="scroll-link" href="#entdecken"')
    if lang=='en':
     for a,b in {'RAIL CYCLES - ZENTRALSCHWEIZ':'RAIL CYCLES - CENTRAL SWITZERLAND','Modelle entdecken':'Explore the models','Entdecke RAIL':'Discover RAIL','Diashow':'Slideshow','Bild 1 von 3':'Image 1 of 3','Vorheriges Bild':'Previous image','Nächstes Bild':'Next image','Slideshow pausieren':'Pause slideshow','Vier RAIL Fahrräder vor einer alten Verladerampe':'Four RAIL bicycles in front of an old loading platform','Die RAIL Modelle gemeinsam vor der Verladerampe':'The RAIL models together at the loading platform','Das weisse RAIL Lopper vor einem Industriegebäude':'The white RAIL Lopper in front of an industrial building'}.items(): hero=hero.replace(a,b)
     hero=hero.replace('assets/', '../assets/')
    cards=[]
+   card_sizes='(max-width: 767px) calc(100vw - 40px), (max-width: 1023px) calc((100vw - 88px) / 2), (max-width: 1456px) calc((100vw - 168px) / 4), 322px'
    for slug,name,category in MODELS:
-    cards.append(f'<article class="featured-model"><a class="featured-photo" href="{route("models")}#{slug}" aria-label="{c["view_model"]}: {name}">{image(slug,"RAIL "+name)}</a><p class="eyebrow">{category}</p><h3>{name}</h3>{link(c["view_model"],route("models")+"#"+slug)}</article>')
+    cards.append(f'<article class="featured-model"><a class="featured-photo featured-photo--{slug}" href="{route("models")}#{slug}" aria-label="{c["view_model"]}: {name}">{image(slug,"RAIL "+name,sizes=card_sizes)}</a><p class="eyebrow">{category}</p><h3>{name}</h3>{link(c["view_model"],route("models")+"#"+slug)}</article>')
    content=hero+f'<section class="home-featured section wrap" id="entdecken"><div class="section-heading"><div><p class="eyebrow">{c["featured"]}</p><h2>{c["intro"]}</h2></div><p class="section-intro">{c["models_teaser"]}</p></div><div class="featured-grid">{"".join(cards)}</div><div class="section-view">{link(c["all_models"],route("models"),"button button-outline")}</div></section>'
    action_photos=''.join(f'<figure><img src="{asset(f"assets/feedback/action-{i}-1200.webp")}" srcset="{asset(f"assets/feedback/action-{i}-480.webp")} 480w, {asset(f"assets/feedback/action-{i}-800.webp")} 800w, {asset(f"assets/feedback/action-{i}-1200.webp")} 1200w" sizes="{"100vw" if i == 2 else "(max-width:767px) calc(100vw - 40px), 50vw"}" loading="lazy" alt="{c["action_alt"]}" width="1200" height="800"></figure>' for i in [2,5,11])
    content+=f'<section class="home-action section wrap"><div class="section-heading"><div><p class="eyebrow">{c["action_intro"]}</p><h2>{c["action_title"]}</h2></div></div><div class="action-grid">{action_photos}</div></section>'
@@ -173,7 +181,7 @@ def make_site(lang):
    content=f'<section class="about-page wrap"><div class="about-copy"><p class="eyebrow">{c["about"]}</p><h1>{c["about_title"]}</h1><h2>Sam Kummrow</h2><p>{c["about_intro"]}</p>{link(c["get_contact"],route("contact"),"button button-outline")}</div><figure>{image("samuel",c["portrait_alt"],eager=True)}<figcaption>Sam Kummrow · RAIL Cycles</figcaption></figure></section>'
   elif page=='contact':
    options=''.join(f'<option value="{slug}">{name}</option>' for slug,name,_ in MODELS)
-   form=f'''<section class="contact-form-section wrap" aria-labelledby="form-title"><div class="form-heading"><p class="eyebrow">{c['contact']}</p><h2 id="form-title">{c['form_title']}</h2><p>{c['form_intro']}</p><p class="form-delivery-note">{c['form_note']}</p></div><form class="contact-form" data-contact-form><p class="required-note">{c['required_note']}</p><div class="form-row"><div class="form-field"><label for="contact-name">{c['name']} *</label><input id="contact-name" name="name" autocomplete="name" required maxlength="100"></div><div class="form-field"><label for="contact-email">{c['email']} *</label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"></div></div><div class="form-field"><label for="contact-model">{c['model_interest']} <span>({c['optional']})</span></label><select id="contact-model" name="model"><option value="">{c['no_model']}</option>{options}</select></div><div class="form-field"><label for="contact-message">{c['message']} *</label><textarea id="contact-message" name="message" rows="6" required maxlength="3000"></textarea></div><p class="form-privacy">{c['privacy_hint']} <a href="{route('privacy')}">{c['privacy']}</a>.</p><button class="button button-light" type="submit" disabled>{c['prepare_email']} {RAIL_MARK}</button><div class="form-result" hidden><p role="status" data-form-status>{c['email_ready']}</p><a class="text-link" data-email-draft href="mailto:sam@railcycles.ch">{c['open_email']} {RAIL_MARK}</a><button class="copy-message" type="button" data-copy-message>{c['copy_message']}</button><textarea class="prepared-message" readonly aria-label="{c['message']}" rows="8" hidden></textarea></div><noscript><p>{c['no_js']}</p></noscript></form></section>'''
+   form=f'''<section class="contact-form-section wrap" aria-labelledby="form-title"><div class="form-heading"><p class="eyebrow">{c['contact']}</p><h2 id="form-title">{c['form_title']}</h2><p>{c['form_intro']}</p><p class="form-delivery-note">{c['form_note']}</p></div><form class="contact-form" data-contact-form><p class="required-note">{c['required_note']}</p><div class="form-row"><div class="form-field"><label for="contact-name">{c['name']} *</label><input id="contact-name" name="name" autocomplete="name" required maxlength="100"></div><div class="form-field"><label for="contact-email">{c['email']} *</label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"></div></div><div class="form-field"><label for="contact-model">{c['model_interest']} <span>({c['optional']})</span></label><select id="contact-model" name="model"><option value="">{c['no_model']}</option>{options}</select></div><div class="form-field"><label for="contact-message">{c['message']} *</label><textarea id="contact-message" name="message" rows="6" required maxlength="3000"></textarea></div><p class="form-privacy">{c['privacy_hint']} <a href="{route('privacy')}">{c['privacy']}</a>.</p><button class="button button-light" type="submit" disabled>{c['prepare_email']} {NAV_ARROW}</button><div class="form-result" hidden><p role="status" data-form-status>{c['email_ready']}</p><a class="text-link" data-email-draft href="mailto:sam@railcycles.ch">{c['open_email']} {NAV_ARROW}</a><button class="copy-message" type="button" data-copy-message>{c['copy_message']}</button><textarea class="prepared-message" readonly aria-label="{c['message']}" rows="8" hidden></textarea></div><noscript><p>{c['no_js']}</p></noscript></form></section>'''
    content=heading(c['contact'],c['contact_title'],c['contact_intro'])+'<p class="selected-model wrap" hidden></p>'+form+'<figure class="contact-photo wrap">'+image('workshop',c['workshop_alt'])+'</figure>'
 
   elif page=='legal':
@@ -186,7 +194,7 @@ def make_site(lang):
   html=f'''<!doctype html>
 <html lang="{'de-CH' if lang=='de' else 'en'}">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="{description}"><meta name="theme-color" content="#0b0b0b"><title>{title}</title>
-<link rel="icon" href="{asset('rail.svg')}" type="image/svg+xml"><link rel="alternate" hreflang="{'en' if lang=='de' else 'de-CH'}" href="{alternate}"><link rel="preload" href="{asset('assets/fonts/fjalla-one.woff2')}" as="font" type="font/woff2" crossorigin><link rel="preload" href="{asset('assets/fonts/barlow-regular.woff2')}" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="{asset('home.css')}"><script src="{asset('home.js')}" defer></script></head>
+<link rel="icon" href="{asset('rail.svg')}" type="image/svg+xml"><link rel="alternate" hreflang="{'en' if lang=='de' else 'de-CH'}" href="{alternate}"><link rel="preload" href="{asset('assets/fonts/fjalla-one.woff2')}" as="font" type="font/woff2" crossorigin><link rel="preload" href="{asset('assets/fonts/barlow-regular.woff2')}" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="{asset('home.css')}?v={CSS_VERSION}"><script src="{asset('home.js')}" defer></script></head>
 <body class="page-{page}"><a class="skip-link" href="#inhalt">{c['skip']}</a>{header}<main id="inhalt">{content}</main>{footer}</body></html>'''
   (out/filename).write_text(html)
 
