@@ -83,7 +83,7 @@ The brand tagline “Built by Hand” stays as supplied in the source, including
 | Featured model 3 | Gravel · Wichelsee · “Modell ansehen” |
 | Model destination | “Alle Modelle entdecken” |
 | Workshop | “Werkstatt”, “Hier entsteht dein RAIL.”, the original workshop paragraph, “Die Werkstatt entdecken” |
-| Maker | “Über mich”, “Der Mensch hinter RAIL.”, “Samuel Kummrow. Der Mensch hinter RAIL Cycles.”, “Samuel kennenlernen” |
+| Maker | “Über mich”, “Der Mensch hinter RAIL.”, “Sam. Der Mensch hinter RAIL Cycles.”, “Sam kennenlernen” |
 | Contact | “Lass uns über dein Bike sprechen.”, “Dein Weg zu RAIL.”, “Kontakt aufnehmen” |
 | Footer | Original tagline, navigation, Samuel's address and email, copyright, legal links and “Nach oben” |
 

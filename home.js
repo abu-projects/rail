@@ -66,18 +66,11 @@
   }
   const contactForm = document.querySelector('[data-contact-form]');
   if (contactForm) {
-    const result = contactForm.querySelector('.form-result');
-    const status = contactForm.querySelector('[data-form-status]');
-    const readyMessage = status.textContent;
-    const draftLink = contactForm.querySelector('[data-email-draft]');
-    const copyButton = contactForm.querySelector('[data-copy-message]');
-    const prepared = contactForm.querySelector('.prepared-message');
     const nameField = contactForm.elements.namedItem('name');
     const messageField = contactForm.elements.namedItem('message');
-    let draft = '';
     contactForm.addEventListener('input', () => {
-      result.hidden = true;
       [nameField, messageField].forEach(field => field.setCustomValidity(''));
+      contactForm.querySelector('[data-form-status]').hidden = true;
     });
     contactForm.addEventListener('submit', event => {
       event.preventDefault();
@@ -85,30 +78,13 @@
         field.setCustomValidity(field.value.trim() ? '' : (english ? 'Please complete this field.' : 'Bitte fülle dieses Feld aus.'));
       });
       if (!contactForm.reportValidity()) return;
-      const data = new FormData(contactForm);
-      const modelSelect = contactForm.elements.namedItem('model');
-      const model = modelSelect.value ? modelSelect.selectedOptions[0].textContent : '';
-      const subject = `${english ? 'Enquiry' : 'Anfrage'}: RAIL${model ? ' ' + model : ''}`;
-      draft = `Name: ${data.get('name').trim()}\n${english ? 'Email' : 'E-Mail'}: ${data.get('email').trim()}${model ? `\n${english ? 'Model' : 'Modell'}: ${model}` : ''}\n\n${data.get('message').trim()}`;
-      draftLink.href = `mailto:sam@railcycles.ch?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(draft)}`;
-      prepared.value = draft;
-      prepared.hidden = true;
-      status.textContent = readyMessage;
-      result.hidden = false;
-      draftLink.focus();
+      const status = contactForm.querySelector('[data-form-status]');
+      status.textContent = english
+        ? 'Your message could not be sent. Sending is currently unavailable. Please try again later.'
+        : 'Deine Nachricht konnte nicht gesendet werden. Der Versand ist derzeit nicht verfügbar. Bitte versuche es später erneut.';
+      status.hidden = false;
     });
     contactForm.querySelector('[type="submit"]').disabled = false;
-    copyButton.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(draft);
-        status.textContent = english ? 'Message copied. Open your email application using the link above.' : 'Nachricht kopiert. Öffne dein E-Mail-Programm über den Link oben.';
-      } catch {
-        prepared.hidden = false;
-        prepared.focus();
-        prepared.select();
-        status.textContent = english ? 'Copy the message below and open your email application using the link above.' : 'Kopiere die Nachricht unten und öffne dein E-Mail-Programm über den Link oben.';
-      }
-    });
   }
   const photoDialog = document.querySelector('.photo-dialog');
   if (photoDialog && typeof photoDialog.showModal === 'function') {
@@ -117,6 +93,7 @@
         if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
         photoDialog.querySelector('[data-dialog-photo]').src = link.href;
+        photoDialog.querySelector('[data-dialog-photo]').alt = link.querySelector('img')?.alt || link.dataset.photoTitle;
         photoDialog.querySelector('#photo-title').textContent = link.dataset.photoTitle;
         photoDialog.showModal();
       });

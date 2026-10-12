@@ -166,7 +166,7 @@ Introduce Samuel with one strong portrait and his approved first-person story. F
 Use a straightforward text-led layout with a supporting workshop or portrait image. Render the supplied details as selectable HTML, not text embedded in an image:
 
 ```text
-Samuel Kummrow
+Sam
 St. Antoniastrasse 17
 6060 Sarnen
 Schweiz
