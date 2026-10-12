@@ -274,7 +274,7 @@ html:not(.js) .site-header{position:sticky;background:var(--bg)}
 .photo-dialog::backdrop{background:#000c}
 .photo-dialog-heading{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:20px}
 .photo-dialog-heading h2{font-size:28px}
-.photo-dialog-heading button{background:transparent;border:1px solid var(--rule);padding:8px 16px;min-height:44px;font:inherit;color:inherit}
+.photo-dialog-heading button{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;background:transparent;border:1px solid var(--rule);padding:0;font:inherit;color:inherit;cursor:pointer}
 .photo-dialog img{max-height:70svh;width:100%;object-fit:contain}
 @media(min-width:768px) and (max-width:1023px){.featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.featured-model h3{font-size:28px}}
 @media(max-width:767px){.action-grid{grid-template-columns:1fr;gap:20px}.family-intro{padding-bottom:36px}.photo-dialog{padding:16px}.photo-dialog-heading h2{font-size:24px}}
