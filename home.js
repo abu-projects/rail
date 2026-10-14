@@ -94,7 +94,9 @@
         event.preventDefault();
         photoDialog.querySelector('[data-dialog-photo]').src = link.href;
         photoDialog.querySelector('[data-dialog-photo]').alt = link.querySelector('img')?.alt || link.dataset.photoTitle;
-        photoDialog.querySelector('#photo-title').textContent = link.dataset.photoTitle;
+        const photoTitle = photoDialog.querySelector('#photo-title');
+        photoTitle.textContent = link.dataset.photoTitle || photoDialog.querySelector('[data-dialog-photo]').alt;
+        photoTitle.hidden = !link.dataset.photoTitle;
         photoDialog.showModal();
       });
     });

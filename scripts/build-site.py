@@ -184,17 +184,19 @@ def make_site(lang):
   elif page=='workshop':
    workshop_photos = [
     (44, 'Einblick in die RAIL Werkstatt', 'Inside the RAIL workshop', 4898, 3265),
-    (36, 'WIG-Schweissen eines Stahlrahmens', 'TIG welding a steel bicycle frame', 4898, 3265),
-    (13, 'Sam bearbeitet ein Rahmenteil am Schraubstock', 'Sam filing a frame component at the bench vice', 3265, 4898),
+    (36, 'WIG schweissen am Tretlager', 'TIG welding at the bottom bracket', 4898, 3265),
+    (13, 'Die Rohrsattlungen werden von Hand zur Perfektion gefeilt', 'Tube mitering to perfection by hand file', 3265, 4898),
     (76, 'Sam mit Schweisshelm bei der Rahmenfertigung', 'Sam with a welding helmet during frame fabrication', 3265, 4898),
    ]
    gallery = '<div class="workshop-gallery">'
    for number,de_alt,en_alt,w,h in workshop_photos:
-    caption = de_alt if lang == 'de' else en_alt
+    alt = de_alt if lang == 'de' else en_alt
+    caption = '' if number == 76 else alt
     source = asset(f'assets/workshop/workshop-{number}-1200.webp')
     full = asset(f'assets/workshop/workshop-{number}-1600.webp')
     srcset = ', '.join(f'{asset(f"assets/workshop/workshop-{number}-{width}.webp")} {width}w' for width in (480,800,1200,1600))
-    gallery += f'<figure><a href="{full}" data-photo data-photo-title="{escape(caption)}"><img src="{source}" srcset="{srcset}" sizes="(max-width: 767px) calc(100vw - 40px), 50vw" width="{w}" height="{h}" loading="lazy" alt="{escape(caption)}"></a><figcaption>{caption}</figcaption></figure>'
+    figcaption = f'<figcaption>{escape(caption)}</figcaption>' if caption else ''
+    gallery += f'<figure><a href="{full}" data-photo data-photo-title="{escape(caption)}"><img src="{source}" srcset="{srcset}" sizes="(max-width: 767px) calc(100vw - 40px), 50vw" width="{w}" height="{h}" loading="lazy" alt="{escape(alt)}"></a>{figcaption}</figure>'
    gallery += '</div>'
    content=heading(c['workshop'],c['workshop_title'],c['workshop_intro'])+f'<div class="workshop-page wrap"><figure class="workshop-establishing">{image("workshop",c["workshop_alt"],eager=True)}<figcaption>{c["bench"]}</figcaption></figure><figure class="workshop-closeup">{image("workshop-detail",c["detail_alt"])}<figcaption>{c["details"]}</figcaption></figure>{gallery}</div>'+contact_strip()
   elif page=='about':
