@@ -88,6 +88,10 @@ def build(root, routes, models, specs, prices, copy):
     write('.well-known/api-catalog', {'linkset': [{'anchor': ORIGIN + '/api/catalog',
         'service-desc': [{'href': ORIGIN + '/openapi.json', 'type': 'application/vnd.oai.openapi+json'}],
         'service-doc': [{'href': ORIGIN + '/agent/api.md', 'type': 'text/markdown'}]}]})
+    # Poppy 0.1 section 3.1 permits ordinary signed-out browsing without auth.
+    # Listing APIs here would instead promise Poppy sessions and an OAuth issuer.
+    write('.well-known/poppy.json', {'protocol_version': '0.1',
+        'organization': {'name': 'RAIL Cycles', 'domain': 'railcycles.ch'}, 'web': {}})
     skill = '''---
 name: rail-cycles-catalog
 description: Find RAIL handmade bicycle models, specifications, guide prices and official bilingual pages.
