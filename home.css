@@ -25,6 +25,13 @@ h3{font-size:clamp(26px,2.75vw,40px);overflow-wrap:anywhere}
 .eyebrow{font-size:13px;line-height:1.5;font-weight:600;letter-spacing:.13em;text-transform:uppercase}
 .skip-link{position:fixed;top:12px;left:20px;background:#fff;color:#000;z-index:100;padding:12px 20px;transform:translateY(-180%)}
 .skip-link:focus{transform:translateY(0)}
+.not-found{padding-block:164px 96px;min-height:80svh}
+.not-found>.eyebrow{color:var(--muted)}
+.not-found-code{font-family:var(--display);font-size:clamp(120px,20vw,240px);line-height:1;margin-block:24px;color:var(--muted)}
+.not-found h1{font-size:clamp(40px,6.4vw,88px);overflow-wrap:anywhere}
+.not-found .page-intro{max-width:620px;margin-top:24px;color:var(--muted)}
+.not-found-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:32px}
+@media(max-width:767px){.not-found{padding-block:128px 64px}.not-found-actions .button{width:100%}}
 .site-header{position:absolute;inset:0 0 auto;z-index:20;background:linear-gradient(#0009,transparent)}
 .header-inner{height:104px;display:flex;align-items:center;justify-content:space-between;gap:32px;border-bottom:1px solid #ffffff38}
 .brand{display:inline-block;flex-shrink:0}

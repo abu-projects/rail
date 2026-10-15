@@ -17,6 +17,8 @@ ROUTES = {
     'de': {'home':'index.html', 'models':'modelle.html', 'workshop':'werkstatt.html', 'about':'ueber-mich.html', 'contact':'kontakt.html', 'legal':'impressum.html', 'privacy':'datenschutz.html'},
     'en': {'home':'index.html', 'models':'models.html', 'workshop':'workshop.html', 'about':'about.html', 'contact':'contact.html', 'legal':'legal-notice.html', 'privacy':'privacy.html'},
 }
+for routes in ROUTES.values():
+ routes['not_found'] = '404.html'
 COPY = {
  'de': {
   'follow_me':'Folge mir auf:','home':'Startseite','models':'Modelle','workshop':'Werkstatt','about':'Über mich','contact':'Kontakt','legal':'Impressum','privacy':'Datenschutz',
@@ -125,8 +127,8 @@ def make_site(lang):
  prefix = '../' if lang == 'en' else ''
  out = ROOT / 'en' if lang == 'en' else ROOT
  out.mkdir(exist_ok=True)
- def asset(path): return prefix + path
- def route(key): return ROUTES[lang][key]
+ def asset(path): return ('/' if page == 'not_found' else prefix) + path
+ def route(key): return (('/en/' if lang == 'en' else '/') if page == 'not_found' else '') + ROUTES[lang][key]
  def image(name, alt, cls='', eager=False, sizes='(max-width: 767px) calc(100vw - 40px), 50vw'):
   widths = [800,1200,1600] if name == 'workshop' else [480,800] if name == 'workshop-detail' else [480,800,1200]
   w = 1200 if name == 'workshop' else 800
@@ -143,6 +145,8 @@ def make_site(lang):
  for page, filename in ROUTES[lang].items():
   nav = ''.join(f'<a href="{route(k)}" {"aria-current=page" if page==k else ""}>{c[k]}</a>' for k in ['home','models','workshop','about','contact'])
   alternate = '../'+ROUTES['de'][page] if lang=='en' else 'en/'+ROUTES['en'][page]
+  if page == 'not_found':
+   alternate = '/404.html' if lang == 'en' else '/en/404.html'
   de_link = route(page) if lang=='de' else alternate
   en_link = route(page) if lang=='en' else alternate
   languages = f'<nav class="language-bar" aria-label="{c["language"]}"><a href="{de_link}" lang="de" hreflang="de-CH" {"aria-current=page" if lang=="de" else ""} aria-label="Deutsch">DE</a><span aria-hidden="true">/</span><a href="{en_link}" lang="en" hreflang="en" {"aria-current=page" if lang=="en" else ""} aria-label="English">EN</a></nav>'
@@ -206,6 +210,11 @@ def make_site(lang):
    form=f'''<section class="contact-form-section wrap" aria-labelledby="form-title"><div class="form-heading"><p class="eyebrow">{c['contact']}</p><h2 id="form-title">{c['form_title']}</h2><p>{c['form_intro']}</p><p class="form-delivery-note">{c['form_note']}</p></div><form class="contact-form" data-contact-form><p class="required-note">{c['required_note']}</p><div class="form-row"><div class="form-field"><label for="contact-name">{c['name']} *</label><input id="contact-name" name="name" autocomplete="name" required maxlength="100"></div><div class="form-field"><label for="contact-email">{c['email']} *</label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"></div></div><div class="form-field"><label for="contact-model">{c['model_interest']} <span>({c['optional']})</span></label><select id="contact-model" name="model"><option value="">{c['no_model']}</option>{options}</select></div><div class="form-field"><label for="contact-message">{c['message']} *</label><textarea id="contact-message" name="message" rows="6" required maxlength="3000"></textarea></div><p class="form-privacy">{c['privacy_hint']} <a href="{route('privacy')}">{c['privacy']}</a>.</p><button class="button button-light" type="submit" disabled>{c['send_message']} {NAV_ARROW}</button><p class="form-status" data-form-status role="alert" hidden></p><noscript><p>{c['no_js']}</p></noscript></form></section>'''
    content=heading(c['contact'],c['contact_title'],c['contact_intro'])+'<p class="selected-model wrap" hidden></p>'+form+'<figure class="contact-photo wrap">'+image('workshop',c['workshop_alt'])+'</figure>'
 
+  elif page=='not_found':
+   missing_title = 'Seite nicht gefunden.' if lang == 'de' else 'Page not found.'
+   missing_intro = ('Dieser Weg führt ins Leere. Die Seite wurde verschoben oder existiert nicht mehr. Entdecke RAIL von der Startseite aus.' if lang == 'de' else 'This route leads nowhere. The page has moved or no longer exists. Discover RAIL from the home page.')
+   home_label = 'Zur Startseite' if lang == 'de' else 'Back to home'
+   content = f'<section class="not-found wrap"><p class="eyebrow">RAIL Cycles / 404</p><p class="not-found-code" aria-hidden="true">404</p><h1>{missing_title}</h1><p class="page-intro">{missing_intro}</p><div class="not-found-actions">{link(home_label,route("home"),"button button-light")}{link(c["models"],route("models"),"button button-outline")}</div></section>'
   elif page=='legal':
    photo_rights_title = 'Urheberrecht an Fotografien' if lang == 'de' else 'Photograph copyright'
    photo_rights = ('Alle Fotografien auf dieser Website sind urheberrechtlich geschützt. Die Rechte verbleiben bei den jeweiligen Rechteinhabern. Jede Vervielfältigung, Veröffentlichung, Bearbeitung oder sonstige Nutzung bedarf der vorherigen Zustimmung der jeweiligen Rechteinhaber.' if lang == 'de' else 'All photographs on this website are protected by copyright. Rights remain with their respective holders. Reproduction, publication, modification or any other use requires prior permission from the respective rights holders.')
@@ -213,15 +222,24 @@ def make_site(lang):
   else:
    content=heading(c['legal_nav'],c['privacy_title'])+f'<article class="legal-copy wrap"><p class="draft-note">{c["draft"]}</p>'+''.join(f'<section><h2>{title}</h2><p>{text}</p></section>' for title,text in c['privacy_sections'])+'</article>'
 
-  title='RAIL Cycles — HAND GMACHT' if page=='home' else c[page]+' — RAIL Cycles'
+  title='RAIL Cycles — HAND GMACHT' if page=='home' else (missing_title if page=='not_found' else c[page])+' — RAIL Cycles'
   description=escape(c.get(page+'_intro',c['intro_text']))
   html=f'''<!doctype html>
 <html lang="{'de-CH' if lang=='de' else 'en'}">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="{description}"><meta name="theme-color" content="#0b0b0b"><title>{title}</title>
 <link rel="icon" href="{asset('rail.svg')}" type="image/svg+xml"><link rel="alternate" hreflang="{'en' if lang=='de' else 'de-CH'}" href="{alternate}"><link rel="preload" href="{asset('assets/fonts/fjalla-one.woff2')}" as="font" type="font/woff2" crossorigin><link rel="preload" href="{asset('assets/fonts/barlow-regular.woff2')}" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="{asset('home.css')}?v={CSS_VERSION}"><script src="{asset('home.js')}?v={JS_VERSION}" defer></script></head>
 <body class="page-{page}"><a class="skip-link" href="#inhalt">{c['skip']}</a>{header}<main id="inhalt">{content}</main>{footer}</body></html>'''
+  if page == 'not_found':
+   html = html.replace('<head>', '<head><meta name="robots" content="noindex">')
   (out/filename).write_text(html)
 
 for language in ROUTES:
  make_site(language)
-print('Generated 14 pages: 5 main pages + 2 legal pages in German and English.')
+# Cloudflare serves the root fallback for missing URLs in either language.
+# Keep complete localized markup so navigation and accessibility labels agree.
+english_404 = (ROOT / 'en/404.html').read_text()
+english_body = english_404.split('<body class="page-not_found">', 1)[1].split('</body>', 1)[0]
+fallback = ROOT / '404.html'
+selector = (ROOT / 'scripts/templates/not-found-language.js').read_text()
+fallback.write_text(fallback.read_text().replace('</body>', f'<template id="not-found-english">{english_body}</template><script>{selector}</script></body>'))
+print('Generated 16 pages: 5 main pages + 2 legal pages + 404 in German and English.')

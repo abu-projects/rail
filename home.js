@@ -2,6 +2,7 @@
   'use strict';
   document.documentElement.classList.add('js');
   const english = document.documentElement.lang === 'en';
+  try { sessionStorage.setItem('rail-language', english ? 'en' : 'de'); } catch {}
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let syncHero = () => {};
   const menuButton = document.querySelector('.menu-toggle');
