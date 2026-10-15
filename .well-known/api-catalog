@@ -1,0 +1,19 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://railcycles.ch/api/catalog",
+      "service-desc": [
+        {
+          "href": "https://railcycles.ch/openapi.json",
+          "type": "application/vnd.oai.openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://railcycles.ch/agent/api.md",
+          "type": "text/markdown"
+        }
+      ]
+    }
+  ]
+}

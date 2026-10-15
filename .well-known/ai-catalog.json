@@ -1,0 +1,30 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "RAIL Cycles",
+    "identifier": "did:web:railcycles.ch"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:railcycles.ch:api:catalog",
+      "displayName": "RAIL bicycle catalog API",
+      "type": "application/vnd.oai.openapi+json",
+      "url": "https://railcycles.ch/openapi.json",
+      "representativeQueries": [
+        "What gravel bike does RAIL make?",
+        "Compare RAIL trail and enduro frame specifications",
+        "What are RAIL frame guide prices?"
+      ]
+    },
+    {
+      "identifier": "urn:air:railcycles.ch:mcp:catalog",
+      "displayName": "RAIL read-only MCP catalog",
+      "type": "application/mcp-server-card+json",
+      "url": "https://railcycles.ch/.well-known/mcp/server-card.json",
+      "representativeQueries": [
+        "List RAIL handmade bicycle models",
+        "Find official RAIL model pages in German and English"
+      ]
+    }
+  ]
+}

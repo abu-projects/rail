@@ -17,9 +17,9 @@ subprocess.run([sys.executable, str(ROOT / "scripts/build-site.py")], cwd=ROOT, 
 if OUTPUT.exists():
     shutil.rmtree(OUTPUT)
 OUTPUT.mkdir()
-for name in (*PAGES, "home.css", "home.js", "rail.svg"):
+for name in (*PAGES, "home.css", "home.js", "rail.svg", "robots.txt", "sitemap.xml", "_headers", "openapi.json", "auth.md"):
     shutil.copy2(ROOT / name, OUTPUT / name)
-for name in ("en", "assets"):
+for name in ("en", "assets", "agent", ".well-known"):
     shutil.copytree(ROOT / name, OUTPUT / name)
 
 # The generated top-level 404 also prevents Pages from treating the site as an SPA.

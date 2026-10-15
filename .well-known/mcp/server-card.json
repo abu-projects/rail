@@ -1,0 +1,30 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
+  "name": "ch.railcycles/catalog",
+  "version": "1.0.0",
+  "title": "RAIL Cycles public catalog",
+  "websiteUrl": "https://railcycles.ch",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://railcycles.ch/mcp",
+      "supportedProtocolVersions": [
+        "2025-11-25",
+        "2025-06-18",
+        "2025-03-26"
+      ]
+    }
+  ],
+  "description": "Read-only public RAIL bicycle catalog. No account or email submission.",
+  "serverInfo": {
+    "name": "ch.railcycles/catalog",
+    "version": "1.0.0"
+  },
+  "transport": {
+    "type": "streamable-http",
+    "endpoint": "https://railcycles.ch/mcp"
+  },
+  "capabilities": {
+    "tools": {}
+  }
+}

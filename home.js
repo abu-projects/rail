@@ -222,3 +222,20 @@
   }).observe(hero);
   updatePlayback();
 })();
+// Expose the public catalog to supporting browser assistants without submitting enquiries.
+(() => {
+  const context = document.modelContext || navigator.modelContext;
+  if (!context?.registerTool) return;
+  context.registerTool({
+    name: 'get_rail_catalog',
+    description: 'Read RAIL bicycle models, specifications, CHF frame guide prices and official bilingual page links. No enquiry or order is submitted.',
+    inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+    annotations: { readOnlyHint: true },
+    async execute() {
+      const response = await fetch('/api/catalog', { credentials: 'omit' });
+      if (!response.ok) throw new Error('The public RAIL catalog is temporarily unavailable.');
+      const catalog = await response.json();
+      return { content: [{ type: 'text', text: JSON.stringify(catalog) }] };
+    }
+  });
+})();

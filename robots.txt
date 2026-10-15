@@ -1,0 +1,8 @@
+# Public content is available to search and AI discovery crawlers.
+User-agent: *
+Content-Signal: search=yes, ai-input=yes
+Disallow: /api/contact
+Allow: /
+
+Sitemap: https://railcycles.ch/sitemap.xml
+Agentmap: https://railcycles.ch/.well-known/ai-catalog.json

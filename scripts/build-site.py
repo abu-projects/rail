@@ -2,8 +2,13 @@
 from pathlib import Path
 from html import escape
 from hashlib import sha256
+import json
+import struct
+from seo import META, metadata, discovery
+from agent_ready import build as build_agent_resources
 
 ROOT = Path(__file__).resolve().parents[1]
+IMAGE_SOURCES = json.loads((ROOT / 'assets/home/sources.json').read_text())
 JS_VERSION = sha256((ROOT / "home.js").read_bytes()).hexdigest()[:12]
 CSS_VERSION = sha256((ROOT / "home.css").read_bytes()).hexdigest()[:12]
 # Embed a local Solar SVG so navigation arrows render identically on every host.
@@ -132,9 +137,12 @@ def make_site(lang):
  def image(name, alt, cls='', eager=False, sizes='(max-width: 767px) calc(100vw - 40px), 50vw'):
   widths = [800,1200,1600] if name == 'workshop' else [480,800] if name == 'workshop-detail' else [480,800,1200]
   w = 1200 if name == 'workshop' else 800
-  dims = 'width="4898" height="3265"' if name == 'workshop' else 'width="3265" height="4898"'
+  original_width, original_height = IMAGE_SOURCES[name]['size']
+  dims = f'width="{original_width}" height="{original_height}"'
   srcset = ', '.join(f'{asset(f"assets/home/{name}-{n}.webp")} {n}w' for n in widths)
-  return f'<img class="{cls}" src="{asset(f"assets/home/{name}-{w}.webp")}" srcset="{srcset}" sizes="{sizes}" {dims} loading="{"eager" if eager else "lazy"}" alt="{escape(alt)}">'
+  priority = ' fetchpriority="high"' if eager else ''
+  avif = ', '.join(f'{asset(f"assets/home/{name}-{n}.avif")} {n}w' for n in widths)
+  return f'<picture><source type="image/avif" srcset="{avif}" sizes="{sizes}"><img class="{cls}" src="{asset(f"assets/home/{name}-{w}.webp")}" srcset="{srcset}" sizes="{sizes}" {dims} loading="{"eager" if eager else "lazy"}" decoding="async"{priority} alt="{escape(alt)}"></picture>'
  def link(label, href, cls='text-link'):
   return f'<a class="{cls}" href="{href}">{label} {NAV_ARROW}</a>'
  def contact_strip():
@@ -183,7 +191,8 @@ def make_site(lang):
     elif lang == 'en' and slug == 'muetterschwandenberg':
      price_note = price_note.replace('excluding VAT', 'excluding rear shock and VAT')
     details=('<p class="model-warning">Warning: Long Vehicle</p>' if slug=='truischjanid' else '')+'<ul class="model-specs">'+''.join(f'<li>{escape(spec)}</li>' for spec in specs)+'</ul>'+f'<p class="model-description">{description}</p><p class="model-price">{c["price_label"]}: CHF {PRICES[slug]}</p><p class="price-note">{price_note}</p>'
-    content+=f'<section class="model-detail" id="{slug}" aria-labelledby="title-{slug}"><div class="model-detail-photo">{image(slug,alt,eager=n==1)}</div><div class="model-detail-copy"><p class="eyebrow">0{n} / {category}</p><h2 id="title-{slug}">{name}</h2><img class="model-wordmark" src="{asset(f"assets/home/{slug}-wordmark.png")}" alt="" loading="lazy">{details}{link(c["enquire"],route("contact")+"?model="+slug,"button button-outline")}</div></section>'
+    wordmark_width, wordmark_height = struct.unpack('>II', (ROOT / f'assets/home/{slug}-wordmark.png').read_bytes()[16:24])
+    content+=f'<section class="model-detail" id="{slug}" aria-labelledby="title-{slug}"><div class="model-detail-photo">{image(slug,alt,eager=n==1)}</div><div class="model-detail-copy"><p class="eyebrow">0{n} / {category}</p><h2 id="title-{slug}">{name}</h2><img class="model-wordmark" src="{asset(f"assets/home/{slug}-wordmark.png")}" width="{wordmark_width}" height="{wordmark_height}" alt="" loading="lazy" decoding="async">{details}{link(c["enquire"],route("contact")+"?model="+slug,"button button-outline")}</div></section>'
    content+='</div>'+contact_strip()
   elif page=='workshop':
    workshop_photos = [
@@ -224,10 +233,20 @@ def make_site(lang):
 
   title='RAIL Cycles — HAND GMACHT' if page=='home' else (missing_title if page=='not_found' else c[page])+' — RAIL Cycles'
   description=escape(c.get(page+'_intro',c['intro_text']))
+  if page != 'not_found':
+   title, description = META[lang][page]
+   description = escape(description, quote=True)
+  seo = metadata(ROUTES, lang, page, MODELS, SPECS)
+  if page == 'home':
+   for media, name, widths in [('(max-width: 767px)', 'hero-mobile', [480,800]), ('(min-width: 768px)', 'hero-lineup', [800,1200,1600,2000])]:
+    candidates = ', '.join(f'{asset(f"assets/home/{name}-{width}.avif")} {width}w' for width in widths)
+    seo += f'<link rel="preload" as="image" type="image/avif" media="{media}" imagesrcset="{candidates}" imagesizes="100vw" fetchpriority="high">'
+
   html=f'''<!doctype html>
 <html lang="{'de-CH' if lang=='de' else 'en'}">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="{description}"><meta name="theme-color" content="#0b0b0b"><title>{title}</title>
-<link rel="icon" href="{asset('rail.svg')}" type="image/svg+xml"><link rel="alternate" hreflang="{'en' if lang=='de' else 'de-CH'}" href="{alternate}"><link rel="preload" href="{asset('assets/fonts/fjalla-one.woff2')}" as="font" type="font/woff2" crossorigin><link rel="preload" href="{asset('assets/fonts/barlow-regular.woff2')}" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="{asset('home.css')}?v={CSS_VERSION}"><script src="{asset('home.js')}?v={JS_VERSION}" defer></script></head>
+{seo}
+<link rel="icon" href="{asset('rail.svg')}" type="image/svg+xml"><link rel="preload" href="{asset('assets/fonts/fjalla-one.woff2')}" as="font" type="font/woff2" crossorigin><link rel="preload" href="{asset('assets/fonts/barlow-regular.woff2')}" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="{asset('home.css')}?v={CSS_VERSION}"><script src="{asset('home.js')}?v={JS_VERSION}" defer></script></head>
 <body class="page-{page}"><a class="skip-link" href="#inhalt">{c['skip']}</a>{header}<main id="inhalt">{content}</main>{footer}</body></html>'''
   if page == 'not_found':
    html = html.replace('<head>', '<head><meta name="robots" content="noindex">')
@@ -235,6 +254,8 @@ def make_site(lang):
 
 for language in ROUTES:
  make_site(language)
+discovery(ROOT, ROUTES)
+build_agent_resources(ROOT, ROUTES, MODELS, SPECS, PRICES, COPY)
 # Cloudflare serves the root fallback for missing URLs in either language.
 # Keep complete localized markup so navigation and accessibility labels agree.
 english_404 = (ROOT / 'en/404.html').read_text()

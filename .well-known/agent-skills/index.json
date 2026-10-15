@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "rail-cycles-catalog",
+      "type": "skill-md",
+      "description": "Read RAIL models, specifications and frame guide prices.",
+      "url": "https://railcycles.ch/.well-known/agent-skills/rail-cycles-catalog/SKILL.md",
+      "digest": "sha256:59b66da24ec5813be403c65b9123a7c89ec1d916f5a1891214c58c5d93d49f31"
+    }
+  ]
+}

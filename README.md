@@ -22,6 +22,42 @@ To change the recipient, update `CONTACT_TO_EMAIL` and redeploy. Emails include 
 
 Run backend checks with `node --test tests/contact.test.mjs`.
 
+## Search, AI discovery and loading performance
+
+`scripts/seo.py` generates unique German and English titles and descriptions,
+absolute canonical URLs, reciprocal `de-CH`/`en`/`x-default` links, social previews,
+and JSON-LD for the organization, website, pages, breadcrumbs and model catalogue.
+Canonical URLs use the production origin `https://railcycles.ch` and Cloudflare
+Pages' extensionless routes. Missing pages remain `noindex` and are excluded from
+the sitemap. No review, stock status or exact purchase offer is invented for
+custom frames.
+
+The build writes `sitemap.xml` with all 14 public localized pages and `robots.txt`.
+Public pages and assets are crawlable, including by OAI-SearchBot and other AI
+search crawlers; `/api/` is excluded. Main content and model specifications are
+available in HTML without JavaScript. An `llms.txt` file is not required for
+Google's AI search features and does not guarantee inclusion or rankings.
+
+Responsive AVIF photos are served with WebP fallbacks. The first hero image has
+responsive preloads and high priority; additional hero slides load on demand.
+Below-the-fold photos remain lazy-loaded, and generated image dimensions reserve
+space. `_headers` enables bounded asset caching and long-lived caching for the
+CSS/JS URLs whose query versions are derived from their contents. HTML is revalidated.
+Run `python3 scripts/prepare-avif-assets.py` with Pillow/AVIF support after changing
+original photos, then run the normal stdlib-only deployment build.
+
+After deployment, submit `https://railcycles.ch/sitemap.xml` in the site's verified
+Google Search Console and Bing Webmaster Tools properties. Inspect a German and
+an English URL, and verify the live robots file and response headers. Cloudflare
+WAF, bot challenges and zone-level AI crawler settings can override robots rules;
+check those settings if legitimate crawlers receive challenges or 403 responses.
+Do not disable general security protections. Local checks cannot confirm indexing,
+real-user Core Web Vitals or a search ranking.
+
+References: [Google AI search guidance](https://developers.google.com/search/docs/appearance/ai-features),
+[OpenAI crawler controls](https://developers.openai.com/api/docs/bots),
+[Cloudflare Pages headers](https://developers.cloudflare.com/pages/configuration/headers/).
+
 ## Cloudflare Pages
 
 Connect `abu-projects/rail`, select the `main` production branch, leave the framework preset as None, set the build command to `python3 scripts/build-cloudflare.py`, and set the output directory to `dist` (repository root as the build root).

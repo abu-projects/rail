@@ -1,0 +1,34 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "RAIL public catalog",
+    "version": "1.0.0",
+    "description": "Read-only public bicycle models and website resources. No account required."
+  },
+  "servers": [
+    {
+      "url": "https://railcycles.ch"
+    }
+  ],
+  "paths": {
+    "/api/catalog": {
+      "get": {
+        "operationId": "getRailCatalog",
+        "summary": "Read public bicycle models, guide prices and page links",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Public RAIL catalog",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
