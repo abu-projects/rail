@@ -16,7 +16,7 @@ The bilingual contact form posts to the Cloudflare Pages Function at `/api/conta
 Set production variables in Cloudflare Pages before deploying:
 - `RESEND_API_KEY`: encrypted secret, sending access restricted to `railcycles.ch`.
 - `CONTACT_FROM_EMAIL`: `RAIL Cycles <website@railcycles.ch>` (verified Resend domain).
-- `CONTACT_TO_EMAIL`: `sam@railcycles.ch`.
+- `CONTACT_TO_EMAIL`: `yapepo@gmail.com` (temporary fallback). The documented target `sam@railcycles.ch` bounced with Google SMTP 550 5.1.1 on 2026-10-15; activate that mailbox or confirm a working Sam address before switching again.
 
 To change the recipient, update `CONTACT_TO_EMAIL` and redeploy. Emails include a branded HTML layout, a plain-text fallback and the visitor’s Reply-To address. Visitor content is HTML-escaped. Never put API keys in Git or frontend code. Existing Google Workspace DNS records must remain in place; Resend is configured for sending only. Preview deployments remain unable to send unless explicitly configured.
 
