@@ -12,3 +12,9 @@ The editable Blender source, web GLB, texture masters, scripts, and delivery not
 The bilingual pages are generated from `scripts/build-site.py` with `python3 scripts/build-site.py`. Feedback 3 workshop originals are in `imgs/Feedback-3/`, from the [supplied Drive folder](https://drive.google.com/drive/folders/1EtxuSPxYqwBBTRB3abs3uoBqTRdZnF0M). Regenerate their responsive WebP assets with `python3 scripts/prepare-workshop-assets.py` (requires Pillow).
 
 Direct contact-form delivery is deferred until Cloudflare and Resend are connected. The form validates the fields and displays an unavailable error on submission. It never opens an email app or reports a successful delivery; no messages are sent.
+
+## Cloudflare Pages
+
+Connect `abu-projects/rail`, select the `main` production branch, leave the framework preset as None, set the build command to `python3 scripts/build-cloudflare.py`, and set the output directory to `dist` (repository root as the build root).
+
+The build regenerates the bilingual pages and packages the current site and its assets. Source photos, design documents, previews, and the V3 experiment are excluded. Commits to `main` trigger production deployments; Resend setup remains deferred.
