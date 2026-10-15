@@ -11,10 +11,19 @@ The editable Blender source, web GLB, texture masters, scripts, and delivery not
 
 The bilingual pages are generated from `scripts/build-site.py` with `python3 scripts/build-site.py`. Feedback 3 workshop originals are in `imgs/Feedback-3/`, from the [supplied Drive folder](https://drive.google.com/drive/folders/1EtxuSPxYqwBBTRB3abs3uoBqTRdZnF0M). Regenerate their responsive WebP assets with `python3 scripts/prepare-workshop-assets.py` (requires Pillow).
 
-Direct contact-form delivery is deferred until Cloudflare and Resend are connected. The form validates the fields and displays an unavailable error on submission. It never opens an email app or reports a successful delivery; no messages are sent.
+The bilingual contact form posts to the Cloudflare Pages Function at `/api/contact`. It validates submissions on the server and sends through Resend. Success is displayed only when Resend accepts the email; errors preserve the visitor's entries. A hidden field filters simple bots, but is not a substitute for rate limiting or Turnstile if abuse occurs.
+
+Set production variables in Cloudflare Pages before deploying:
+- `RESEND_API_KEY`: encrypted secret, sending access restricted to `railcycles.ch`.
+- `CONTACT_FROM_EMAIL`: `RAIL Cycles <website@railcycles.ch>` (verified Resend domain).
+- `CONTACT_TO_EMAIL`: temporary test recipient `yapepo@gmail.com`.
+
+After end-to-end delivery is confirmed and the owner approves the final recipient, change only `CONTACT_TO_EMAIL` to Sam's address and redeploy. Remove the temporary developer-testing notice from both privacy pages in `scripts/build-site.py` at that point. Never put API keys in Git or frontend code. Existing Google Workspace DNS records must remain in place; Resend is configured for sending only. Preview deployments remain unable to send unless explicitly configured.
+
+Run backend checks with `node --test tests/contact.test.mjs`.
 
 ## Cloudflare Pages
 
 Connect `abu-projects/rail`, select the `main` production branch, leave the framework preset as None, set the build command to `python3 scripts/build-cloudflare.py`, and set the output directory to `dist` (repository root as the build root).
 
-The build regenerates the bilingual pages and packages the current site and its assets. Source photos, design documents, previews, and the V3 experiment are excluded. Commits to `main` trigger production deployments; Resend setup remains deferred.
+The build regenerates the bilingual pages and packages the current site and its assets. Source photos, design documents, previews, and the V3 experiment are excluded. Cloudflare compiles `functions/` separately from the static `dist/` output. Commits to `main` trigger production deployments.

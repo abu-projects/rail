@@ -294,6 +294,10 @@ html:not(.js) .site-header{position:sticky;background:var(--bg)}
 .button-light .nav-arrow{background:transparent}
 
 .form-status{padding:16px 20px;border-left:2px solid #dba79b;background:var(--surface);color:#f0c3b8}
+.form-status[data-state="success"]{border-color:#9fc8a7;color:#b8dfbf}
+.form-status[data-state="sending"]{border-color:var(--muted);color:var(--text)}
 
 @media(max-width:1100px){.footer-main{grid-template-columns:1fr auto;gap:16px 24px}.footer-nav{grid-column:1/-1;grid-row:2;justify-content:flex-start}.footer-social{justify-self:end}}
 @media(max-width:767px){.site-footer{padding-top:24px}.footer-main{grid-template-columns:1fr;gap:16px;padding-bottom:24px}.footer-main>div{grid-column:auto}.footer-nav{gap:0 20px}.footer-social{justify-self:start}.footer-social .social-item{width:44px;height:44px}}
+
+.form-trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }

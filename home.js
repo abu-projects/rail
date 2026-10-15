@@ -73,17 +73,49 @@
       [nameField, messageField].forEach(field => field.setCustomValidity(''));
       contactForm.querySelector('[data-form-status]').hidden = true;
     });
-    contactForm.addEventListener('submit', event => {
+    let sending = false;
+    contactForm.addEventListener('submit', async event => {
       event.preventDefault();
+      if (sending) return;
       [nameField, messageField].forEach(field => {
         field.setCustomValidity(field.value.trim() ? '' : (english ? 'Please complete this field.' : 'Bitte fülle dieses Feld aus.'));
       });
       if (!contactForm.reportValidity()) return;
       const status = contactForm.querySelector('[data-form-status]');
-      status.textContent = english
-        ? 'Your message could not be sent. Sending is currently unavailable. Please try again later.'
-        : 'Deine Nachricht konnte nicht gesendet werden. Der Versand ist derzeit nicht verfügbar. Bitte versuche es später erneut.';
+      const submit = contactForm.querySelector('[type="submit"]');
+      const fields = Object.fromEntries(new FormData(contactForm));
+      const inputs = [...contactForm.querySelectorAll('input, select, textarea')];
+      sending = true;
+      submit.disabled = true;
+      inputs.forEach(field => { field.disabled = true; });
+      contactForm.setAttribute('aria-busy', 'true');
+      status.textContent = english ? 'Sending your message…' : 'Deine Nachricht wird gesendet…';
+      status.dataset.state = 'sending';
       status.hidden = false;
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(fields), signal: AbortSignal.timeout(15000),
+        });
+        const result = await response.json();
+        if (!response.ok || result.ok !== true) throw new Error('Delivery failed');
+        status.textContent = english ? '✓ Thank you! Your message has been sent.' : '✓ Danke! Deine Nachricht wurde gesendet.';
+        status.dataset.state = 'success';
+        contactForm.reset();
+        const note = document.querySelector('.selected-model');
+        if (note) note.hidden = true;
+      } catch {
+        status.dataset.state = 'error';
+        status.textContent = english
+          ? 'Your message could not be sent. Your entries are still here. Please try again later.'
+          : 'Deine Nachricht konnte nicht gesendet werden. Deine Eingaben bleiben erhalten. Bitte versuche es später erneut.';
+      } finally {
+        sending = false;
+        submit.disabled = false;
+        inputs.forEach(field => { field.disabled = false; });
+        contactForm.removeAttribute('aria-busy');
+        status.hidden = false;
+      }
     });
     contactForm.querySelector('[type="submit"]').disabled = false;
   }
