@@ -55,7 +55,7 @@ test('HTML enquiries display visitor markup as text and preserve message line br
   assert.ok(sent.html.includes('&lt;img src=x onerror=alert(1)&gt;'));
   assert.ok(sent.html.includes('Size &lt;54&gt; &amp; &quot;custom&quot;<br>&lt;script&gt;alert(1)&lt;/script&gt;'));
   assert.ok(!sent.html.includes('<script>'));
-  assert.ok(!sent.html.includes('<img'));
+  assert.ok(!/<img\b[^>]*\bonerror=/i.test(sent.html));
   assert.ok(sent.text.includes(data.message));
 });
 

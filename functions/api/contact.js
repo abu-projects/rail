@@ -23,7 +23,7 @@ function enquiryHtml(name, email, model, message) {
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#eeeee9;"><tr><td align="center" style="padding:32px 16px;">
 <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:600px;">
 <tr><td bgcolor="#0b0b0b" style="padding:32px;color:#f4f4f1;">
-<a href="https://www.railcycles.ch" style="font-size:38px;line-height:1;font-weight:900;letter-spacing:4px;text-decoration:none;color:#f4f4f1;">RAIL<span style="color:#aeb6a5;">.</span></a>
+<a href="https://www.railcycles.ch" style="display:inline-block;text-decoration:none;color:#f4f4f1;"><img src="https://www.railcycles.ch/assets/rail-email-logo.png" width="234" height="62" alt="RAIL Cycles" border="0" style="display:block;width:234px;max-width:100%;height:auto;border:0;color:#f4f4f1;font-size:28px;"></a>
 <p style="margin:14px 0 0;font-size:11px;letter-spacing:2px;color:#b8b8b2;">HAND GMACHT · SWISS CUSTOM BICYCLES</p></td></tr>
 <tr><td bgcolor="#ffffff" style="padding:32px;border-bottom:1px solid #e6e6df;">
 <p style="margin:0 0 12px;font-size:11px;font-weight:bold;letter-spacing:2px;color:#65705c;">KONTAKTFORMULAR</p>
