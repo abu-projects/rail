@@ -16,9 +16,9 @@ The bilingual contact form posts to the Cloudflare Pages Function at `/api/conta
 Set production variables in Cloudflare Pages before deploying:
 - `RESEND_API_KEY`: encrypted secret, sending access restricted to `railcycles.ch`.
 - `CONTACT_FROM_EMAIL`: `RAIL Cycles <website@railcycles.ch>` (verified Resend domain).
-- `CONTACT_TO_EMAIL`: temporary test recipient `yapepo@gmail.com`.
+- `CONTACT_TO_EMAIL`: `sam@railcycles.ch`.
 
-After end-to-end delivery is confirmed and the owner approves the final recipient, change only `CONTACT_TO_EMAIL` to Sam's address and redeploy. Remove the temporary developer-testing notice from both privacy pages in `scripts/build-site.py` at that point. Never put API keys in Git or frontend code. Existing Google Workspace DNS records must remain in place; Resend is configured for sending only. Preview deployments remain unable to send unless explicitly configured.
+To change the recipient, update `CONTACT_TO_EMAIL` and redeploy. Emails include a branded HTML layout, a plain-text fallback and the visitor’s Reply-To address. Visitor content is HTML-escaped. Never put API keys in Git or frontend code. Existing Google Workspace DNS records must remain in place; Resend is configured for sending only. Preview deployments remain unable to send unless explicitly configured.
 
 Run backend checks with `node --test tests/contact.test.mjs`.
 

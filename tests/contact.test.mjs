@@ -44,6 +44,21 @@ test('invalid or cross-origin submissions never reach the email service', async 
   assert.equal(calls, 0);
 });
 
+test('HTML enquiries display visitor markup as text and preserve message line breaks', async t => {
+  let sent;
+  t.mock.method(globalThis, 'fetch', async (_url, options) => {
+    sent = JSON.parse(options.body);
+    return Response.json({ id: 'accepted-message' });
+  });
+  const data = { ...fields, name: '<img src=x onerror=alert(1)>', message: 'Size <54> & "custom"\n<script>alert(1)</script>' };
+  assert.equal((await onRequest(context(data))).status, 200);
+  assert.ok(sent.html.includes('&lt;img src=x onerror=alert(1)&gt;'));
+  assert.ok(sent.html.includes('Size &lt;54&gt; &amp; &quot;custom&quot;<br>&lt;script&gt;alert(1)&lt;/script&gt;'));
+  assert.ok(!sent.html.includes('<script>'));
+  assert.ok(!sent.html.includes('<img'));
+  assert.ok(sent.text.includes(data.message));
+});
+
 test('provider rejection or network failure never reports successful sending', async t => {
   for (const result of ['rejected', 'network', 'missing-id']) {
     const mock = t.mock.method(globalThis, 'fetch', async () => {
