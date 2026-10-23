@@ -308,7 +308,5 @@ html:not(.js) .site-header{position:sticky;background:var(--bg)}
 .footer-credit-heart{color:#dba79b;padding-inline:2px}
 .footer-bottom .footer-credit-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--text);text-decoration:none}
 .footer-credit-link img{display:block;width:48px;height:30px;object-fit:contain}
-.footer-credit-link>span:not(.footer-credit-arrow){font-weight:500}
-.footer-credit-arrow{color:var(--muted);font-size:16px}
-.footer-credit-link:hover>span:not(.footer-credit-arrow){text-decoration:underline;text-underline-offset:4px}
+.footer-credit-link:hover img{opacity:.75}
 .footer-credit-link:focus-visible{outline:2px solid var(--text);outline-offset:5px}
