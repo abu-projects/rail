@@ -26,7 +26,6 @@ for routes in ROUTES.values():
  routes['not_found'] = '404.html'
 COPY = {
  'de': {
-  'studio_before':'Mit','studio_after':'gestaltet von','studio_heart':'Herz',
   'follow_me':'Folge mir auf:','home':'Startseite','models':'Modelle','workshop':'Werkstatt','about':'Über mich','contact':'Kontakt','legal':'Impressum','privacy':'Datenschutz',
   'skip':'Zum Inhalt springen','navigation':'Hauptnavigation','language':'Sprache wählen','menu':'Menü','close':'Schliessen','open_menu':'Menü öffnen','close_menu':'Menü schliessen','top':'Nach oben','country':'Schweiz','pages':'Entdecke RAIL','legal_nav':'Rechtliche Seiten',
   'intro':'Vier Modelle.<br>Eine Handschrift.','intro_text':'RAIL Cycles aus der Zentralschweiz. Entdecke die Fahrräder, wirf einen Blick in die Werkstatt und lerne Sam kennen.',
@@ -48,7 +47,6 @@ COPY = {
   ],
  },
  'en': {
-  'studio_before':'Made with','studio_after':'by','studio_heart':'love',
   'follow_me':'Follow me on:','home':'Home','models':'Models','workshop':'Workshop','about':'About me','contact':'Contact','legal':'Legal notice','privacy':'Privacy',
   'skip':'Skip to content','navigation':'Main navigation','language':'Choose language','menu':'Menu','close':'Close','open_menu':'Open menu','close_menu':'Close menu','top':'Back to top','country':'Switzerland','pages':'Discover RAIL','legal_nav':'Legal pages',
   'intro':'Four models.<br>One signature.','intro_text':'RAIL Cycles from Central Switzerland. Explore the bikes, step inside the workshop and meet Sam.',
@@ -163,7 +161,7 @@ def make_site(lang):
   brand = f'<a class="brand" href="{route("home")}" aria-label="RAIL Cycles – {c["home"]}"><img src="{asset("assets/rail-transparent.svg")}" width="188" height="50" alt="RAIL"></a>'
   header = f'<header class="site-header" id="start"><div class="header-inner wrap">{brand}<nav class="main-nav" id="hauptnavigation" aria-label="{c["navigation"]}">{nav}</nav>{languages}<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="hauptnavigation" aria-label="{c["open_menu"]}" hidden><span>{c["menu"]}</span><span class="menu-icon" aria-hidden="true"></span></button></div></header>'
   social='<div class="social-links">'+''.join(f'<a class="social-item" href="{asset(f"assets/feedback/social-{i}.webp")}" data-photo data-photo-title="{name}" aria-label="{name}" title="{name}">{SOCIAL_ICONS[name.lower()]}</a>' for i,name in enumerate(['Instagram','Facebook','X','TikTok'],1))+'</div>'
-  footer = f'<footer class="site-footer"><div class="footer-main wrap"><div class="footer-brand">{brand}</div><nav class="footer-nav" aria-label="{c["navigation"]}">{nav}</nav><div class="footer-social">{social}</div></div><div class="footer-bottom wrap"><span>© 2026 RAIL Cycles</span><nav class="legal-nav" aria-label="{c["legal_nav"]}"><a href="{route("legal")}">{c["legal"]}</a><a href="{route("privacy")}">{c["privacy"]}</a></nav><div class="footer-actions"><div class="footer-credit" lang="{lang}"><span>{c["studio_before"]} <span class="footer-credit-heart" role="img" aria-label="{c["studio_heart"]}">♥</span> {c["studio_after"]}</span><a class="footer-credit-link" href="https://abudesigns.com/" target="_blank" rel="noopener noreferrer" aria-label="Abu Designs"><img src="{asset('assets/abu-designs-logo.png')}" width="48" height="30" alt="" loading="lazy" decoding="async"></a></div><a href="#start" data-back-top>{c["top"]} {directional_arrow('up')}</a></div></div></footer><dialog class="photo-dialog" aria-labelledby="photo-title"><div class="photo-dialog-heading"><h2 id="photo-title"></h2><button type="button" data-close-photo aria-label="{c["close"]}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><img data-dialog-photo alt="{c["photo_alt"]}"></dialog>'
+  footer = f'<footer class="site-footer"><div class="footer-main wrap"><div class="footer-brand">{brand}</div><nav class="footer-nav" aria-label="{c["navigation"]}">{nav}</nav><div class="footer-social">{social}</div></div><div class="footer-bottom wrap"><span>© 2026 RAIL Cycles</span><nav class="legal-nav" aria-label="{c["legal_nav"]}"><a href="{route("legal")}">{c["legal"]}</a><a href="{route("privacy")}">{c["privacy"]}</a></nav><div class="footer-actions"><a href="#start" data-back-top>{c["top"]} {directional_arrow('up')}</a></div></div></footer><dialog class="photo-dialog" aria-labelledby="photo-title"><div class="photo-dialog-heading"><h2 id="photo-title"></h2><button type="button" data-close-photo aria-label="{c["close"]}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><img data-dialog-photo alt="{c["photo_alt"]}"></dialog>'
 
 
   if page == 'home':

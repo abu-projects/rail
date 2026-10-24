@@ -302,11 +302,5 @@ html:not(.js) .site-header{position:sticky;background:var(--bg)}
 
 .form-trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 
-/* Studio signature */
+/* Footer actions */
 .footer-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:12px 56px}
-.footer-credit{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;letter-spacing:.025em}
-.footer-credit-heart{color:#dba79b;padding-inline:2px}
-.footer-bottom .footer-credit-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--text);text-decoration:none}
-.footer-credit-link img{display:block;width:48px;height:30px;object-fit:contain}
-.footer-credit-link:hover img{opacity:.75}
-.footer-credit-link:focus-visible{outline:2px solid var(--text);outline-offset:5px}
