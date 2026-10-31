@@ -1,0 +1,110 @@
+{
+  "truischjanid": [
+    {
+      "src": "assets/models/truischjanid-extra-01.webp",
+      "de": "Truischjanid Rahmen beim Schweissen in der Werkstatt",
+      "en": "Truischjanid frame being welded in the workshop"
+    },
+    {
+      "src": "assets/models/truischjanid-extra-02.webp",
+      "de": "Truischjanid Hinterbau mit Kassette und Antrieb",
+      "en": "Truischjanid rear triangle with cassette and drivetrain"
+    },
+    {
+      "src": "assets/models/truischjanid-extra-03.webp",
+      "de": "Detail am Truischjanid Rahmen in der Werkstatt",
+      "en": "Detail of the Truischjanid frame in the workshop"
+    },
+    {
+      "src": "assets/models/truischjanid-extra-04.webp",
+      "de": "Truischjanid in Seitenansicht vor der Werkstatt",
+      "en": "Side view of the Truischjanid outside the workshop"
+    },
+    {
+      "src": "assets/models/truischjanid-extra-05.webp",
+      "de": "Arbeit am Truischjanid in der Werkstatt",
+      "en": "Working on the Truischjanid in the workshop"
+    },
+    {
+      "src": "assets/models/truischjanid-extra-06.webp",
+      "de": "Truischjanid auf einem schmalen Bergtrail",
+      "en": "Truischjanid on a narrow mountain trail"
+    },
+    {
+      "src": "assets/models/truischjanid-extra-07.webp",
+      "de": "Truischjanid mit Blick auf die Alpen",
+      "en": "Truischjanid overlooking the Alps"
+    }
+  ],
+  "lopper": [
+    {
+      "src": "assets/models/lopper-extra-01.webp",
+      "de": "Rahmenrohre und Bauteile für das Lopper",
+      "en": "Frame tubes and components for the Lopper"
+    },
+    {
+      "src": "assets/models/lopper-extra-02.webp",
+      "de": "Lopper auf einem alpinen Trail",
+      "en": "Lopper on an alpine trail"
+    },
+    {
+      "src": "assets/models/lopper-extra-03.webp",
+      "de": "Lopper in einer Kurve auf dem Waldtrail",
+      "en": "Lopper cornering on a forest trail"
+    },
+    {
+      "src": "assets/models/lopper-extra-04.webp",
+      "de": "Lopper auf einem felsigen Waldtrail",
+      "en": "Lopper on a rocky forest trail"
+    },
+    {
+      "src": "assets/models/lopper-extra-05.webp",
+      "de": "Lopper vor einer alten Verladerampe in Schwarz-Weiss",
+      "en": "Black-and-white view of the Lopper at an old loading platform"
+    },
+    {
+      "src": "assets/models/lopper-extra-06.webp",
+      "de": "Lopper von vorne an der Verladerampe",
+      "en": "Front view of the Lopper at the loading platform"
+    }
+  ],
+  "wichelsee": [
+    {
+      "src": "assets/models/wichelsee-extra-01.webp",
+      "de": "Wichelsee mit Reisegepäck vor einem alten Gebäude",
+      "en": "Wichelsee with touring luggage outside an old building"
+    },
+    {
+      "src": "assets/models/wichelsee-extra-02.webp",
+      "de": "Wichelsee bei einer Pause am Strand",
+      "en": "Wichelsee during a break at the beach"
+    },
+    {
+      "src": "assets/models/wichelsee-extra-03.webp",
+      "de": "Rahmenrohre und Bauteile für das Wichelsee",
+      "en": "Frame tubes and components for the Wichelsee"
+    },
+    {
+      "src": "assets/models/wichelsee-extra-04.webp",
+      "de": "Bearbeitung eines Wichelsee Rahmenbauteils in der Werkstatt",
+      "en": "A Wichelsee frame component being worked on in the workshop"
+    },
+    {
+      "src": "assets/models/wichelsee-extra-05.webp",
+      "de": "Wichelsee in Seitenansicht vor einer Hausfassade",
+      "en": "Side view of the Wichelsee against a building facade"
+    },
+    {
+      "src": "assets/models/wichelsee-extra-06.webp",
+      "de": "Wichelsee mit grüner Rahmentasche an der Verladerampe",
+      "en": "Wichelsee with a green frame bag at the loading platform"
+    }
+  ],
+  "muetterschwandenberg": [
+    {
+      "src": "assets/home/hero-lineup-1200.webp",
+      "de": "RAIL Familie vor der Verladerampe – das grüne MsB oben rechts",
+      "en": "RAIL family at the loading platform – the green MsB is at the upper right"
+    }
+  ]
+}

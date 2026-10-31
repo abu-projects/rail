@@ -126,14 +126,22 @@
       "url": "https://railcycles.ch/en/models#lopper",
       "specifications": {
         "de": [
-          "150 mm Federweg hinten, 160 mm Federweg vorne",
-          "Federmechanik optimiert für gutes Ansprechverhalten",
-          "Super flacher Steuerwinkel, steiler Sitzwinkel, ausgewogene Länge des Hinterbaus"
+          "Das gewählte Designkonzept des abgestützten Eingelenkers besticht mit seiner Einfachheit und nutzt das 4130 Material optimal bei seinen Stärken.",
+          "Federweg hinten: 155 bis 160 mm Federweg (abhängig vom Dämpferhub und Kettenstrebenlänge).",
+          "Gross dimensionierte Rillenkugellager ermöglichen ein gutes Ansprechverhalten des Hinterbaus und eine lange Lebensdauer. Die Lager sind von Aussen sehr gut zugänglich und können optimal gepflegt werden. Sie sind im Hauptdrehpunkt in den Kettenstreben platziert, um die Distanz zwischen den Lagerpunkten zu maximieren und so das Hebelverhältnis bei Seitenlasten (Scandi Flick) zu optimieren.",
+          "Die Geometrie wird auf den Fahrer so angepasst, das eine ausgeglichene Schwerpunktlage in Bezug auf die Fahrgeometrie, als auch auf die Fahrwerkkinematik resultiert.",
+          "Die Längen des Hauptrahmens und der Kettenstreben, werden auf jeden Kunden angepasst, um eine perfekte Balance in Bezug auf Up- und Downhill zu erlangen.",
+          "Ein flacher Lenkwinkel nimmt Schläge an der Front besser auf und die Lenkgeometrie bleibt beim Anbremsen länger erhalten.",
+          "Federweg vorne: Gabeln mit 160 bis 170 mm"
         ],
         "en": [
-          "150 mm rear travel, 160 mm front travel",
-          "Suspension linkage optimised for sensitivity",
-          "Super slack head angle, steep seat angle and a balanced rear-end length"
+          "The chosen design concept of the supported single-pivot suspension impresses with its simplicity and makes optimum use of the 4130’s material properties.",
+          "Rear travel: 155 to 160 mm (depending on shock travel and chainstay length).",
+          "Large-diameter deep-groove ball bearings ensure good responsiveness of the rear triangle and a long service life. The bearings are easily accessible from the outside, allowing for optimal maintainability. The main pivot bearings are integrated into the chainstays to maximise the distance between the bearing points, thereby optimising the lever ratio under lateral loads (Scandi Flick).",
+          "The geometry is tailored to the rider in such a way as to result in a balanced centre of gravity in relation to both the riding geometry and the suspension kinematics.",
+          "The lengths of the main frame and the chainstays are tuned to the customer to achieve a perfect balance for both uphill and downhill riding.",
+          "A flat head angle better absorbs impacts at the front, and the steering geometry is maintained for longer when braking.",
+          "Front suspension travel: forks with 160 to 170 mm"
         ]
       },
       "frameGuidePrice": {
@@ -154,14 +162,22 @@
       "url": "https://railcycles.ch/en/models#muetterschwandenberg",
       "specifications": {
         "de": [
-          "130 mm Federweg hinten, 140 mm Federweg vorne",
-          "Federmechanik optimiert für gutes Klettern",
-          "Flacher Steuerwinkel, sehr steiler Sitzwinkel, langer Hinterbau"
+          "Basierend auf dem gleichen Fullsuspension- Konzept wie beim Lopper, gilt auch beim Muetterschwandeberg (MsB): Elegant Symplicity. Dabei werden die Materialeigenschaften von 4130 ideal ausgenutzt.",
+          "Durch den etwas geringeren Federweg und einem bewusst leicht höher gewählten Hauptdrehpunkt des Hinterbaus, fährt sich das MsB etwas straffer und spritziger, klettert mit offenem Dämpfer technische Trails hinauf und überrascht dabei mit viel Traktion.",
+          "Federweg hinten: 125 bis 130 mm Federweg (abhängig vom Dämpferhub und Kettenstrebenlänge).",
+          "Die Geometrie wird auf den Fahrer so angepasst, das eine ausgeglichene Schwerpunktlage in Bezug auf die Fahrgeometrie, als auch auf die Fahrwerkkinematik entsteht.",
+          "Längere Hauptrahmen und längere Kettenstreben, insbesondere bei grossen Personen, ergeben eine perfekte Balance in Bezug auf Up- und Downhill.",
+          "Ein tendenziell flacher Lenkwinkel nimmt Schläge an der Front besser auf und die Lenkgeometrie bleibt beim Anbremsen länger erhalten.",
+          "Federweg vorne: Gabeln mit 140 bis 150 mm"
         ],
         "en": [
-          "130 mm rear travel, 140 mm front travel",
-          "Suspension linkage optimised for climbing",
-          "Slack head angle, very steep seat angle and a long rear end"
+          "Based on the same full-suspension concept as the Lopper, the Muetterschwandeberg (MsB) also embodies Elegant Symplicity. This makes ideal use of the material properties of 4130 steel.",
+          "Thanks to the shorter travel and a rear triangle pivot point deliberately set slightly higher, the MsB rides with a stiffer and more responsive feel; it climbs technical trails with the shock open, whilst surprising with plenty of traction.",
+          "Rear travel: 125 to 130 mm (depending on shock travel and chainstay length).",
+          "The geometry is tailored to the rider in such a way as to create a balanced centre of gravity in relation to both the riding geometry and the suspension kinematics.",
+          "Longer main frame and longer chainstays, particularly for taller riders, result in a perfect balance between uphill and downhill performance.",
+          "A flat head angle absorbs impacts at the front more effectively, and the steering geometry is maintained for longer when braking.",
+          "Front suspension travel: forks with 140 to 150 mm"
         ]
       },
       "frameGuidePrice": {

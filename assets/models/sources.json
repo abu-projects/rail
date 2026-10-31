@@ -1,0 +1,271 @@
+{
+  "note": "Supplied model albums; exported from the rendered Google Photos viewer using supported browser pageAssets. Original album ordering retained. WebP quality 84, maximum dimension 1600; no upscaling.",
+  "photos": [
+    {
+      "file": "truischjanid-extra-01.webp",
+      "album": "https://photos.app.goo.gl/LkceivMRidFiivVJA",
+      "albumPhotoNumber": 1,
+      "photoDateLabel": "2022-10-14 18:25:17",
+      "renderedSourceDimensions": [
+        1906,
+        1270
+      ],
+      "outputDimensions": [
+        1600,
+        1066
+      ]
+    },
+    {
+      "file": "truischjanid-extra-02.webp",
+      "album": "https://photos.app.goo.gl/LkceivMRidFiivVJA",
+      "albumPhotoNumber": 2,
+      "photoDateLabel": "2023-01-25 20:39:11",
+      "renderedSourceDimensions": [
+        1906,
+        1270
+      ],
+      "outputDimensions": [
+        1600,
+        1066
+      ]
+    },
+    {
+      "file": "truischjanid-extra-03.webp",
+      "album": "https://photos.app.goo.gl/LkceivMRidFiivVJA",
+      "albumPhotoNumber": 3,
+      "photoDateLabel": "2023-01-25 20:59:40",
+      "renderedSourceDimensions": [
+        846,
+        1270
+      ],
+      "outputDimensions": [
+        846,
+        1270
+      ]
+    },
+    {
+      "file": "truischjanid-extra-04.webp",
+      "album": "https://photos.app.goo.gl/LkceivMRidFiivVJA",
+      "albumPhotoNumber": 4,
+      "photoDateLabel": "2023-02-21 20:03:26",
+      "renderedSourceDimensions": [
+        1600,
+        1066
+      ],
+      "outputDimensions": [
+        1600,
+        1066
+      ]
+    },
+    {
+      "file": "truischjanid-extra-05.webp",
+      "album": "https://photos.app.goo.gl/LkceivMRidFiivVJA",
+      "albumPhotoNumber": 5,
+      "photoDateLabel": "2023-02-21 20:03:29",
+      "renderedSourceDimensions": [
+        846,
+        1270
+      ],
+      "outputDimensions": [
+        846,
+        1270
+      ]
+    },
+    {
+      "file": "truischjanid-extra-06.webp",
+      "album": "https://photos.app.goo.gl/LkceivMRidFiivVJA",
+      "albumPhotoNumber": 6,
+      "photoDateLabel": "2025-08-26 11:09:18",
+      "renderedSourceDimensions": [
+        1906,
+        1270
+      ],
+      "outputDimensions": [
+        1600,
+        1066
+      ]
+    },
+    {
+      "file": "truischjanid-extra-07.webp",
+      "album": "https://photos.app.goo.gl/LkceivMRidFiivVJA",
+      "albumPhotoNumber": 7,
+      "photoDateLabel": "2025-08-26 11:09:24",
+      "renderedSourceDimensions": [
+        1752,
+        1168
+      ],
+      "outputDimensions": [
+        1600,
+        1067
+      ]
+    },
+    {
+      "file": "lopper-extra-01.webp",
+      "album": "https://photos.app.goo.gl/WjaZ9JMe7YbAyVPJA",
+      "albumPhotoNumber": 1,
+      "photoDateLabel": "2023-03-12 18:04:10",
+      "renderedSourceDimensions": [
+        952,
+        1270
+      ],
+      "outputDimensions": [
+        952,
+        1270
+      ]
+    },
+    {
+      "file": "lopper-extra-02.webp",
+      "album": "https://photos.app.goo.gl/WjaZ9JMe7YbAyVPJA",
+      "albumPhotoNumber": 2,
+      "photoDateLabel": "2023-07-14 12:37:24",
+      "renderedSourceDimensions": [
+        1906,
+        1270
+      ],
+      "outputDimensions": [
+        1600,
+        1066
+      ]
+    },
+    {
+      "file": "lopper-extra-03.webp",
+      "album": "https://photos.app.goo.gl/WjaZ9JMe7YbAyVPJA",
+      "albumPhotoNumber": 3,
+      "photoDateLabel": "2024-07-11 11:24:12",
+      "renderedSourceDimensions": [
+        1906,
+        1270
+      ],
+      "outputDimensions": [
+        1600,
+        1066
+      ]
+    },
+    {
+      "file": "lopper-extra-04.webp",
+      "album": "https://photos.app.goo.gl/WjaZ9JMe7YbAyVPJA",
+      "albumPhotoNumber": 4,
+      "photoDateLabel": "2024-07-12 11:01:06",
+      "renderedSourceDimensions": [
+        1906,
+        1270
+      ],
+      "outputDimensions": [
+        1600,
+        1066
+      ]
+    },
+    {
+      "file": "lopper-extra-05.webp",
+      "album": "https://photos.app.goo.gl/WjaZ9JMe7YbAyVPJA",
+      "albumPhotoNumber": 5,
+      "photoDateLabel": "2025-11-08 11:16:21",
+      "renderedSourceDimensions": [
+        1906,
+        1270
+      ],
+      "outputDimensions": [
+        1600,
+        1066
+      ]
+    },
+    {
+      "file": "lopper-extra-06.webp",
+      "album": "https://photos.app.goo.gl/WjaZ9JMe7YbAyVPJA",
+      "albumPhotoNumber": 6,
+      "photoDateLabel": "2025-11-08 11:18:23",
+      "renderedSourceDimensions": [
+        846,
+        1270
+      ],
+      "outputDimensions": [
+        846,
+        1270
+      ]
+    },
+    {
+      "file": "wichelsee-extra-01.webp",
+      "album": "https://photos.app.goo.gl/JAt2t2P5qRCmdkUJ7",
+      "albumPhotoNumber": 1,
+      "photoDateLabel": "2024-04-14 12:40:42",
+      "renderedSourceDimensions": [
+        1694,
+        1270
+      ],
+      "outputDimensions": [
+        1600,
+        1200
+      ]
+    },
+    {
+      "file": "wichelsee-extra-02.webp",
+      "album": "https://photos.app.goo.gl/JAt2t2P5qRCmdkUJ7",
+      "albumPhotoNumber": 2,
+      "photoDateLabel": "2024-04-15 15:50:47",
+      "renderedSourceDimensions": [
+        1694,
+        1270
+      ],
+      "outputDimensions": [
+        1600,
+        1200
+      ]
+    },
+    {
+      "file": "wichelsee-extra-03.webp",
+      "album": "https://photos.app.goo.gl/JAt2t2P5qRCmdkUJ7",
+      "albumPhotoNumber": 3,
+      "photoDateLabel": "2024-08-01 11:23:20",
+      "renderedSourceDimensions": [
+        952,
+        1270
+      ],
+      "outputDimensions": [
+        952,
+        1270
+      ]
+    },
+    {
+      "file": "wichelsee-extra-04.webp",
+      "album": "https://photos.app.goo.gl/JAt2t2P5qRCmdkUJ7",
+      "albumPhotoNumber": 4,
+      "photoDateLabel": "2024-08-01 15:20:48",
+      "renderedSourceDimensions": [
+        952,
+        1270
+      ],
+      "outputDimensions": [
+        952,
+        1270
+      ]
+    },
+    {
+      "file": "wichelsee-extra-05.webp",
+      "album": "https://photos.app.goo.gl/JAt2t2P5qRCmdkUJ7",
+      "albumPhotoNumber": 5,
+      "photoDateLabel": "2025-11-08 12:01:09",
+      "renderedSourceDimensions": [
+        846,
+        1270
+      ],
+      "outputDimensions": [
+        846,
+        1270
+      ]
+    },
+    {
+      "file": "wichelsee-extra-06.webp",
+      "album": "https://photos.app.goo.gl/JAt2t2P5qRCmdkUJ7",
+      "albumPhotoNumber": 6,
+      "photoDateLabel": "2025-11-08 12:06:52",
+      "renderedSourceDimensions": [
+        846,
+        1270
+      ],
+      "outputDimensions": [
+        846,
+        1270
+      ]
+    }
+  ]
+}

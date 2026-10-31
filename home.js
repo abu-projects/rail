@@ -140,6 +140,97 @@
       if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) photoDialog.close();
     });
   }
+  // Inline model galleries keep the existing direct links and load only on demand.
+  const galleries = [...document.querySelectorAll('[data-gallery]')].map(element => {
+    const picture = element.querySelector('picture');
+    const cover = picture.querySelector('img');
+    const extra = document.createElement('img');
+    extra.hidden = true;
+    extra.decoding = 'async';
+    element.querySelector('.model-gallery-frame').append(extra);
+    return { element, picture, cover, extra, photos: JSON.parse(element.dataset.gallery),
+      current: 0, paused: reducedMotion.matches, visible: 0, timer: null, request: 0,
+      caption: element.querySelector('[data-gallery-caption]'), coverAlt: cover.alt,
+      play: element.querySelector('[data-gallery-play]') };
+  });
+  let activeGallery = null;
+  function galleryControls(gallery) {
+    const count = gallery.photos.length + 1;
+    gallery.element.querySelector('[data-gallery-count]').textContent = `${gallery.current + 1} / ${count}`;
+    gallery.play.textContent = english ? (gallery.paused ? 'Play' : 'Pause') : (gallery.paused ? 'Start' : 'Pause');
+    gallery.play.setAttribute('aria-label', english ? (gallery.paused ? 'Play slideshow' : 'Pause slideshow') : (gallery.paused ? 'Diashow starten' : 'Diashow pausieren'));
+    gallery.element.querySelector('.model-gallery-controls').hidden = count < 2;
+  }
+  function scheduleGallery(gallery) {
+    clearTimeout(gallery.timer);
+    if (gallery !== activeGallery || gallery.paused || document.hidden || menuOpen || gallery.photos.length === 0 || (gallery.element.contains(document.activeElement) && document.activeElement !== gallery.play)) return;
+    gallery.timer = setTimeout(() => showGallery(gallery, gallery.current + 1), 2000);
+  }
+  async function showGallery(gallery, index) {
+    clearTimeout(gallery.timer);
+    const request = ++gallery.request;
+    const next = (index + gallery.photos.length + 1) % (gallery.photos.length + 1);
+    if (next === 0) {
+      gallery.picture.hidden = false;
+      gallery.extra.hidden = true;
+      gallery.caption.textContent = gallery.coverAlt;
+    } else {
+      const photo = gallery.photos[next - 1];
+      const candidate = new Image();
+      candidate.src = photo.src;
+      try { await candidate.decode(); }
+      catch { if (request === gallery.request) { gallery.paused = true; galleryControls(gallery); } return; }
+      if (request !== gallery.request) return;
+      gallery.extra.src = photo.src;
+      gallery.extra.alt = photo.alt;
+      gallery.extra.hidden = false;
+      gallery.picture.hidden = true;
+      gallery.caption.textContent = photo.alt;
+    }
+    gallery.current = next;
+    galleryControls(gallery);
+    scheduleGallery(gallery);
+  }
+  function chooseGallery() {
+    const next = galleries.filter(gallery => gallery.visible > 0).sort((a, b) => b.visible - a.visible)[0] || null;
+    if (next !== activeGallery) {
+      if (activeGallery) { clearTimeout(activeGallery.timer); ++activeGallery.request; }
+      activeGallery = next;
+      if (next) showGallery(next, 0);
+    } else if (next) scheduleGallery(next);
+  }
+  galleries.forEach(gallery => {
+    galleryControls(gallery);
+    gallery.element.querySelector('[data-gallery-prev]').addEventListener('click', () => showGallery(gallery, gallery.current - 1));
+    gallery.element.querySelector('[data-gallery-next]').addEventListener('click', () => showGallery(gallery, gallery.current + 1));
+    gallery.play.addEventListener('click', () => { gallery.paused = !gallery.paused; if (gallery.paused) ++gallery.request; galleryControls(gallery); scheduleGallery(gallery); });
+    gallery.element.addEventListener('focusin', () => { clearTimeout(gallery.timer); ++gallery.request; });
+    gallery.element.addEventListener('focusout', () => setTimeout(() => scheduleGallery(gallery), 0));
+  });
+  if (galleries.length && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { galleries.find(gallery => gallery.element === entry.target).visible = entry.intersectionRatio; });
+      chooseGallery();
+    }, { threshold: [0, .1, .25, .5, .75, 1] });
+    galleries.forEach(gallery => observer.observe(gallery.element));
+  }
+  let galleryMenuOpen = menuOpen;
+  syncHero = () => {
+    if (menuOpen && !galleryMenuOpen) galleries.forEach(gallery => { ++gallery.request; });
+    galleryMenuOpen = menuOpen;
+    galleries.forEach(scheduleGallery);
+  };
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) galleries.forEach(gallery => { ++gallery.request; });
+    galleries.forEach(scheduleGallery);
+  });
+  window.addEventListener('hashchange', () => {
+    const target = galleries.find(gallery => gallery.element.closest('section').id === location.hash.slice(1));
+    if (target) showGallery(target, 0);
+  });
+  reducedMotion.addEventListener('change', () => {
+    if (reducedMotion.matches) galleries.forEach(gallery => { gallery.paused = true; ++gallery.request; galleryControls(gallery); scheduleGallery(gallery); });
+  });
   const hero = document.querySelector('.hero');
   if (!hero) return;
   const slides = [...document.querySelectorAll('[data-slide]')];

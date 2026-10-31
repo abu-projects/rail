@@ -304,3 +304,17 @@ html:not(.js) .site-header{position:sticky;background:var(--bg)}
 
 /* Footer actions */
 .footer-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:12px 56px}
+
+/* A stable frame keeps mixed portrait/landscape model photographs from moving the text. */
+.model-gallery-frame{aspect-ratio:2/3;background:#141414;display:grid;place-items:center;overflow:hidden}
+.model-gallery-frame picture{width:100%;height:100%;display:block}
+.model-gallery-frame img{width:100%;height:100%;object-fit:contain}
+.model-gallery-frame [hidden]{display:none}
+.model-gallery-controls{display:flex;align-items:center;gap:16px;padding-top:16px}
+.model-gallery-controls[hidden]{display:none}
+.model-gallery-controls button{min-width:44px;min-height:44px;border:1px solid #777;background:transparent;color:inherit;padding:8px 12px;font:inherit;cursor:pointer}
+.model-gallery-controls button:last-child{margin-left:auto}
+.model-gallery-controls button:hover{border-color:currentColor}
+.model-gallery-caption{font-size:14px;line-height:1.5;color:var(--muted);margin:12px 0 0}
+
+.model-detail{align-items:start}
