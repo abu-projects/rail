@@ -1,3 +1,6 @@
+// Website enquiry recipient, deployed with the site so routing changes take effect together.
+const contactRecipient = 'samkum@duck.com';
+
 const models = new Map([
   ['', 'General enquiry'], ['truischjanid', 'Truischjanid'], ['lopper', 'Lopper'],
   ['muetterschwandenberg', 'Muetterschwandeberg'], ['wichelsee', 'Wichelsee'],
@@ -65,14 +68,14 @@ export async function onRequest({ request, env }) {
     || email.length > 254 || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email)
     || !message.trim() || message.length > 3000 || message.includes('\x00')
     || !models.has(model)) return reply(400);
-  if (!env.RESEND_API_KEY || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) return reply(503);
+  if (!env.RESEND_API_KEY || !env.CONTACT_FROM_EMAIL) return reply(503);
   try {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         from: env.CONTACT_FROM_EMAIL,
-        to: [env.CONTACT_TO_EMAIL],
+        to: [contactRecipient],
         reply_to: email.trim(),
         subject: `RAIL website enquiry: ${models.get(model)}`,
         text: `Name: ${name.trim()}\nEmail: ${email.trim()}\nModel: ${models.get(model)}\n\n${message.trim()}`,

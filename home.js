@@ -164,7 +164,7 @@
   function scheduleGallery(gallery) {
     clearTimeout(gallery.timer);
     if (gallery !== activeGallery || gallery.paused || document.hidden || menuOpen || gallery.photos.length === 0 || (gallery.element.contains(document.activeElement) && document.activeElement !== gallery.play)) return;
-    gallery.timer = setTimeout(() => showGallery(gallery, gallery.current + 1), 2000);
+    gallery.timer = setTimeout(() => showGallery(gallery, gallery.current + 1), 4000);
   }
   async function showGallery(gallery, index) {
     clearTimeout(gallery.timer);

@@ -6,7 +6,7 @@ import { readFile } from 'node:fs/promises';
 const source = await readFile(new URL('../functions/api/contact.js', import.meta.url), 'utf8');
 const { onRequest } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
 const fields = { name: 'Test rider', email: 'rider@example.com', model: 'wichelsee', message: 'A test enquiry.' };
-const env = { RESEND_API_KEY: 'test-only', CONTACT_TO_EMAIL: 'owner@example.com', CONTACT_FROM_EMAIL: 'RAIL <website@railcycles.ch>' };
+const env = { RESEND_API_KEY: 'test-only', CONTACT_TO_EMAIL: 'tech@railcycles.ch', CONTACT_FROM_EMAIL: 'RAIL <website@railcycles.ch>' };
 function context(data = fields, options = {}) {
   return { env, request: new Request('https://railcycles.ch/api/contact', {
     method: 'POST', headers: { Origin: 'https://railcycles.ch', 'Content-Type': 'application/json', ...options.headers },
@@ -23,7 +23,7 @@ test('valid enquiry reaches the configured recipient and replies to the visitor'
   const response = await onRequest(context({ ...fields, to: 'attacker@example.com' }));
   assert.equal(response.status, 200);
   assert.deepEqual(await response.json(), { ok: true });
-  assert.deepEqual(sent.to, ['owner@example.com']);
+  assert.deepEqual(sent.to, ['samkum@duck.com']);
   assert.equal(sent.reply_to, fields.email);
   assert.ok(sent.text.includes(fields.message));
   assert.ok(sent.subject.includes('Wichelsee'));
