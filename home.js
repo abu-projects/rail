@@ -1,3 +1,4 @@
+// RAIL: image-aligned copy with always-visible enquiry actions.
 (() => {
   'use strict';
   document.documentElement.classList.add('js');
