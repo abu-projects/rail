@@ -140,6 +140,98 @@
       if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) photoDialog.close();
     });
   }
+  // Match adjacent copy to its image, revealing complete paragraphs on demand.
+  document.querySelectorAll('.model-detail, .home-story, .about-page').forEach((section, index) => {
+    const copy = section.querySelector('.model-detail-copy, .home-story-copy, .about-copy');
+    const media = section.querySelector('.model-gallery-frame, figure');
+    if (!copy || !media) return;
+    const image = media.querySelector('img');
+    const actions = [...copy.children].filter(child => child.matches('.button'));
+    const blocks = [...copy.children].filter(child => !actions.includes(child));
+    // Long single paragraphs can also end at a sentence without losing their opening.
+    const sentences = [];
+    const segmenter = new Intl.Segmenter(english ? 'en' : 'de', { granularity: 'sentence' });
+    blocks.filter(block => block.matches('p') && !block.children.length).forEach(block => {
+      const parts = [...segmenter.segment(block.textContent)];
+      if (parts.length < 2) return;
+      block.replaceChildren(...parts.map(({ segment }) => {
+        const span = document.createElement('span');
+        span.textContent = segment;
+        sentences.push(span);
+        return span;
+      }));
+    });
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'copy-toggle';
+    toggle.hidden = true;
+    copy.id ||= `aligned-copy-${index}`;
+    toggle.setAttribute('aria-controls', copy.id);
+    const footer = document.createElement('div');
+    footer.className = 'copy-actions';
+    footer.append(toggle, ...actions);
+    copy.append(footer);
+    section.classList.add('aligned-story');
+    let expanded = false;
+    let scheduled = false;
+    function update() {
+      scheduled = false;
+      blocks.forEach(block => { block.hidden = false; });
+      sentences.forEach(sentence => { sentence.hidden = false; });
+      copy.classList.remove('copy-collapsed');
+      const height = (media.matches('.model-gallery-frame') ? media : image)?.getBoundingClientRect().height || 0;
+      // Stacked layouts need neither clipping nor a disclosure control.
+      if (mobile.matches || height < 160) { toggle.hidden = true; return; }
+      const top = copy.getBoundingClientRect().top;
+      const bottom = blocks.at(-1).getBoundingClientRect().bottom;
+      const actionHeight = footer.getBoundingClientRect().height - (toggle.hidden ? 0 : toggle.getBoundingClientRect().height + parseFloat(getComputedStyle(toggle).marginTop));
+      if (bottom - top + actionHeight <= height + 1) { toggle.hidden = true; return; }
+      toggle.hidden = false;
+      toggle.textContent = english ? (expanded ? 'Read less' : 'Read more') : (expanded ? 'Weniger lesen' : 'Mehr lesen');
+      toggle.setAttribute('aria-expanded', String(expanded));
+      if (expanded) return;
+      const available = height - footer.getBoundingClientRect().height - 24;
+      let overflow = false;
+      blocks.forEach((block, i) => {
+        // Keep the section title visible, then hide at a complete block boundary.
+        if (overflow) { block.hidden = true; return; }
+        if (i > 1 && block.getBoundingClientRect().bottom - top > available) {
+          overflow = true;
+          const parts = [...block.children].filter(child => sentences.includes(child));
+          if (parts.length) {
+            let hide = false;
+            parts.forEach(part => {
+              if (part.getBoundingClientRect().bottom - top > available) hide = true;
+              part.hidden = hide;
+            });
+            block.hidden = parts.every(part => part.hidden);
+          } else block.hidden = true;
+        }
+      });
+      copy.style.setProperty('--copy-height', `${height}px`);
+      copy.classList.add('copy-collapsed');
+    }
+    function schedule() {
+      if (!scheduled) { scheduled = true; requestAnimationFrame(update); }
+    }
+    toggle.addEventListener('click', () => {
+      const previousTop = toggle.getBoundingClientRect().top;
+      expanded = !expanded;
+      update();
+      if (!expanded && previousTop > 0) {
+        const currentTop = toggle.getBoundingClientRect().top;
+        if (currentTop < 100) window.scrollBy(0, currentTop - 120);
+      }
+      toggle.focus({ preventScroll: true });
+    });
+    const observer = new ResizeObserver(schedule);
+    observer.observe(media);
+    observer.observe(copy);
+    media.addEventListener('load', schedule, true);
+    mobile.addEventListener('change', schedule);
+    document.fonts.ready.then(schedule);
+    schedule();
+  });
   // Inline model galleries keep the existing direct links and load only on demand.
   const galleries = [...document.querySelectorAll('[data-gallery]')].map(element => {
     const picture = element.querySelector('picture');
@@ -238,18 +330,20 @@
   const playback = document.querySelector('#slide-play');
   let current = 0;
   let manuallyPaused = reducedMotion.matches;
-  let hovered = false;
   let timer;
-  let loading = false;
+  let slideRequest = 0;
+  let requestedSlide = 0;
+  let transitionTimer;
+  const slideLoads = new Map();
   let heroVisible = true;
 
   function schedule() {
     clearTimeout(timer);
     const stopped = manuallyPaused || document.hidden || !heroVisible || menuOpen;
     hero.classList.toggle('is-motion-paused', stopped || reducedMotion.matches);
-    const focused = hero.contains(document.activeElement) && document.activeElement !== playback;
-    if (!stopped && !hovered && !focused && !loading) {
-      timer = setTimeout(() => changeSlide(1), 14000);
+    const focused = hero.contains(document.activeElement) && document.activeElement !== playback && document.activeElement.matches(':focus-visible');
+    if (!stopped && !focused) {
+      timer = setTimeout(() => changeSlide(1), 6000);
     }
   }
   syncHero = schedule;
@@ -258,15 +352,12 @@
     playback.firstElementChild.textContent = manuallyPaused ? '▷' : 'Ⅱ';
     schedule();
   }
-  async function changeSlide(direction) {
-    if (loading) return;
-    clearTimeout(timer);
-    loading = true;
-    const next = (current + direction + slides.length) % slides.length;
-    const image = slides[next].querySelector('img');
-    try {
+  function loadSlide(index) {
+    if (slideLoads.has(index)) return slideLoads.get(index);
+    const image = slides[index].querySelector('img');
+    const ready = (async () => {
       if (image.dataset.src) {
-        slides[next].querySelectorAll('source[data-srcset]').forEach(source => {
+        slides[index].querySelectorAll('source[data-srcset]').forEach(source => {
           source.srcset = source.dataset.srcset;
         });
         image.srcset = image.dataset.srcset;
@@ -274,33 +365,49 @@
         await image.decode();
         delete image.dataset.src;
       }
-      const outgoing = slides[current];
-      outgoing.classList.add('is-leaving');
-      outgoing.classList.remove('is-active');
-      outgoing.setAttribute('aria-hidden', 'true');
-      slides[next].classList.add('is-active');
-      slides[next].removeAttribute('aria-hidden');
-      current = next;
-      document.querySelector('#slide-number').textContent = String(current + 1).padStart(2, '0');
-      document.querySelector('.slide-count').setAttribute('aria-label', english ? `Image ${current + 1} of ${slides.length}` : `Bild ${current + 1} von ${slides.length}`);
-      // Keep the outgoing camera moving under the dissolve; reset only when covered.
-      if (!reducedMotion.matches) await new Promise(resolve => setTimeout(resolve, 2400));
-      outgoing.classList.remove('is-leaving');
+    })();
+    slideLoads.set(index, ready);
+    ready.catch(() => slideLoads.delete(index));
+    return ready;
+  }
+  async function changeSlide(direction) {
+    clearTimeout(timer);
+    const request = ++slideRequest;
+    requestedSlide = (requestedSlide + direction + slides.length) % slides.length;
+    const next = requestedSlide;
+    try {
+      await loadSlide(next);
+      if (request !== slideRequest) return;
+      clearTimeout(transitionTimer);
+      slides.forEach(slide => slide.classList.remove('is-leaving'));
+      if (next !== current) {
+        const outgoing = slides[current];
+        outgoing.classList.add('is-leaving');
+        outgoing.classList.remove('is-active');
+        outgoing.setAttribute('aria-hidden', 'true');
+        slides[next].classList.add('is-active');
+        slides[next].removeAttribute('aria-hidden');
+        current = next;
+        document.querySelector('#slide-number').textContent = String(current + 1).padStart(2, '0');
+        document.querySelector('.slide-count').setAttribute('aria-label', english ? `Image ${current + 1} of ${slides.length}` : `Bild ${current + 1} von ${slides.length}`);
+        // Keep the outgoing photograph moving throughout the dissolve.
+        transitionTimer = setTimeout(() => outgoing.classList.remove('is-leaving'), reducedMotion.matches ? 0 : 1200);
+      }
     } catch {
-      // Keep the last complete photograph visible if the next asset is unavailable.
-      manuallyPaused = true;
-      updatePlayback();
+      if (request !== slideRequest) return;
+      requestedSlide = current;
     } finally {
-      loading = false;
-      schedule();
+      if (request === slideRequest) schedule();
     }
   }
+  // Warm the remaining images after the initial page load, before the first change.
+  function warmSlides() { slides.forEach((_, index) => { loadSlide(index).catch(() => {}); }); }
+  if (document.readyState === 'complete') warmSlides();
+  else window.addEventListener('load', warmSlides, { once: true });
   controls.hidden = false;
   document.querySelector('#slide-prev').addEventListener('click', () => changeSlide(-1));
   document.querySelector('#slide-next').addEventListener('click', () => changeSlide(1));
   playback.addEventListener('click', () => { manuallyPaused = !manuallyPaused; updatePlayback(); });
-  controls.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') { hovered = true; schedule(); } });
-  controls.addEventListener('pointerleave', () => { hovered = false; schedule(); });
   hero.addEventListener('focusin', schedule);
   hero.addEventListener('focusout', () => setTimeout(schedule, 0));
   document.addEventListener('visibilitychange', schedule);

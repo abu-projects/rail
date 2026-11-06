@@ -102,9 +102,29 @@
   ],
   "muetterschwandenberg": [
     {
-      "src": "assets/home/hero-lineup-1200.webp",
-      "de": "RAIL Familie vor der Verladerampe – das grüne MsB oben rechts",
-      "en": "RAIL family at the loading platform – the green MsB is at the upper right"
+      "src": "assets/models/muetterschwandenberg-extra-01.webp",
+      "de": "Muetterschwandeberg Rahmenbauteile auf der Werkbank",
+      "en": "Muetterschwandeberg frame components on the workbench"
+    },
+    {
+      "src": "assets/models/muetterschwandenberg-extra-02.webp",
+      "de": "Schweissnähte am Muetterschwandeberg Rahmen",
+      "en": "Welds on the Muetterschwandeberg frame"
+    },
+    {
+      "src": "assets/models/muetterschwandenberg-extra-03.webp",
+      "de": "Muetterschwandeberg auf einem felsigen Trail",
+      "en": "Muetterschwandeberg on a rocky trail"
+    },
+    {
+      "src": "assets/models/muetterschwandenberg-extra-04.webp",
+      "de": "Muetterschwandeberg auf einem offenen Bergtrail",
+      "en": "Muetterschwandeberg on an open mountain trail"
+    },
+    {
+      "src": "assets/models/muetterschwandenberg-extra-05.webp",
+      "de": "Muetterschwandeberg vor einer Gletscherlandschaft",
+      "en": "Muetterschwandeberg in front of a glacier landscape"
     }
   ]
 }
