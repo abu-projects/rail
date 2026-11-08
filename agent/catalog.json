@@ -111,11 +111,10 @@
       "frameGuidePrice": {
         "amount": 2500,
         "currency": "CHF",
-        "includesVAT": false,
-        "note": "ROM prices are for the finished, coated and machined frame, excluding VAT.",
+        "note": "ROM prices are for the finished, coated and machined frame.",
         "localizedNotes": {
-          "de": "Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen, ohne MwSt.",
-          "en": "ROM prices are for the finished, coated and machined frame, excluding VAT."
+          "de": "Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen.",
+          "en": "ROM prices are for the finished, coated and machined frame."
         }
       }
     },
@@ -147,11 +146,10 @@
       "frameGuidePrice": {
         "amount": 3100,
         "currency": "CHF",
-        "includesVAT": false,
-        "note": "ROM prices are for the finished, coated and machined frame, excluding VAT.",
+        "note": "ROM prices are for the finished, coated and machined frame.",
         "localizedNotes": {
-          "de": "Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen ohne Federbein, ohne MwSt.",
-          "en": "ROM prices are for the finished, coated and machined frame, excluding VAT."
+          "de": "Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen ohne Federbein.",
+          "en": "ROM prices are for the finished, coated and machined frame."
         }
       }
     },
@@ -183,11 +181,10 @@
       "frameGuidePrice": {
         "amount": 3100,
         "currency": "CHF",
-        "includesVAT": false,
-        "note": "ROM prices are for the finished, coated and machined frame, excluding rear shock and VAT.",
+        "note": "ROM prices are for the finished, coated and machined frame, excluding rear shock.",
         "localizedNotes": {
-          "de": "Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen ohne Federbein, ohne MwSt.",
-          "en": "ROM prices are for the finished, coated and machined frame, excluding rear shock and VAT."
+          "de": "Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen ohne Federbein.",
+          "en": "ROM prices are for the finished, coated and machined frame, excluding rear shock."
         }
       }
     },
@@ -209,11 +206,10 @@
       "frameGuidePrice": {
         "amount": 2500,
         "currency": "CHF",
-        "includesVAT": false,
-        "note": "ROM prices are for the finished, coated and machined frame, excluding VAT.",
+        "note": "ROM prices are for the finished, coated and machined frame.",
         "localizedNotes": {
-          "de": "Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen, ohne MwSt.",
-          "en": "ROM prices are for the finished, coated and machined frame, excluding VAT."
+          "de": "Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen.",
+          "en": "ROM prices are for the finished, coated and machined frame."
         }
       }
     }

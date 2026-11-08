@@ -88,7 +88,7 @@ COPY['de'].update({
  'model_question':'Du möchtest mehr über dieses Modell erfahren? Schreib mir.',
  'no_js':'Bitte aktiviere JavaScript, um das Kontaktformular zu nutzen.',
  'family_copy':'Die Rail Familie wird aus 25CrMo4 von Hand WIG geschweisst. Die Rohre stammen von Reynolds und Columbus und wurden für die jeweiligen Belastungen sorgfältig ausgewählt. Die gefrästen Teile werden am Zürichsee hergestellt. Ausfallenden entsprechen dem UDH Standard. Alle Rahmen werden kathaphoretisch tauchlackiert und dann Pulverbeschichtet für ultimativen Schutz vor Korrosion und Abnützung. Das Tretlager wird mit Serienummer und Namen graviert, die Farbwahl steht dir frei.',
- 'price_note':'Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen, ohne MwSt.',
+ 'price_note':'Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen.',
  'price_label':'Richtpreis','family_label':'Von Hand gefertigt.','action_title':'Draussen zu Hause.',
  'action_intro':'RAIL auf dem Trail.','location':'Zentralschweiz',
  'action_alt':'Mountainbiker auf einem Trail','photo_alt':'Detail aus der Rahmenfertigung',
@@ -103,7 +103,7 @@ COPY['en'].update({
  'model_question':'Want to know more about this model? Write to me.',
  'no_js':'Please enable JavaScript to use the contact form.',
  'family_copy':'The Rail family is TIG-welded by hand from 25CrMo4 Reynolds and Columbus tubing. The tubes are carefully selected for the locations and loads of each model. Machined parts are made in a town near lake Zurich. Dropouts follow the UDH standard. Every frame is cathodic dip-coated and then powder-coated for ultimate protection against corrosion and wear. The bottom bracket is engraved with serial number and your name. Give me your favourite RAL code of your choice for the powder coating.',
- 'price_note':'ROM prices are for the finished, coated and machined frame, excluding VAT.',
+ 'price_note':'ROM prices are for the finished, coated and machined frame.',
  'price_label':'ROM price','family_label':'Made by hand.','action_title':'At home outdoors.',
  'action_intro':'RAIL on the trail.','location':'Central Switzerland',
  'action_alt':'Mountain biker riding a trail','photo_alt':'Detail from frame fabrication',
@@ -188,9 +188,9 @@ def make_site(lang):
     specs,description=SPECS[lang][slug]
     price_note = c['price_note']
     if lang == 'de' and slug in ('lopper', 'muetterschwandenberg'):
-     price_note = price_note.replace('Rahmen,', 'Rahmen ohne Federbein,')
+     price_note = price_note.replace('Rahmen.', 'Rahmen ohne Federbein.')
     elif lang == 'en' and slug == 'muetterschwandenberg':
-     price_note = price_note.replace('excluding VAT', 'excluding rear shock and VAT')
+     price_note = price_note.replace('frame.', 'frame, excluding rear shock.')
     if slug in ('lopper', 'muetterschwandenberg'):
      model_copy = ''.join(f'<p class="model-description">{escape(paragraph)}</p>' for paragraph in [*specs, description])
     else:

@@ -11,7 +11,7 @@ Von Hand gefertigt.
 
 Die Rail Familie wird aus 25CrMo4 von Hand WIG geschweisst. Die Rohre stammen von Reynolds und Columbus und wurden für die jeweiligen Belastungen sorgfältig ausgewählt. Die gefrästen Teile werden am Zürichsee hergestellt. Ausfallenden entsprechen dem UDH Standard. Alle Rahmen werden kathaphoretisch tauchlackiert und dann Pulverbeschichtet für ultimativen Schutz vor Korrosion und Abnützung. Das Tretlager wird mit Serienummer und Namen graviert, die Farbwahl steht dir frei.
 
-Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen, ohne MwSt.
+Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen.
 
 [Truischjanid](https://railcycles.ch/modelle#truischjanid)[Lopper](https://railcycles.ch/modelle#lopper)[Muetterschwandeberg](https://railcycles.ch/modelle#muetterschwandenberg)[Wichelsee](https://railcycles.ch/modelle#wichelsee)
 
@@ -32,7 +32,7 @@ Ein Hardtail für dein nächstes Endurorennen, truisch ja nid!
 
 Richtpreis: CHF 2’500
 
-Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen, ohne MwSt.
+Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen.
 
 [Modell anfragen ](https://railcycles.ch/kontakt.html?model=truischjanid)
 
@@ -62,7 +62,7 @@ Ein Enduro -Trail Bike das auch gerne mal an einem Endurorennen mitmischt.
 
 Richtpreis: CHF 3’100
 
-Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen ohne Federbein, ohne MwSt.
+Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen ohne Federbein.
 
 [Modell anfragen ](https://railcycles.ch/kontakt.html?model=lopper)
 
@@ -92,7 +92,7 @@ Ein Trail - DownCountry Bike - mit enorm breitem Einsatzbereich. Von verschlunge
 
 Richtpreis: CHF 3’100
 
-Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen ohne Federbein, ohne MwSt.
+Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen ohne Federbein.
 
 [Modell anfragen ](https://railcycles.ch/kontakt.html?model=muetterschwandenberg)
 
@@ -111,7 +111,7 @@ Klassisch, filigran, langlebig, ruhige Seele
 
 Richtpreis: CHF 2’500
 
-Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen, ohne MwSt.
+Richtpreise gelten für den fertig beschichteten und gefrästen Rahmen.
 
 [Modell anfragen ](https://railcycles.ch/kontakt.html?model=wichelsee)
 

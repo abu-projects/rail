@@ -11,7 +11,7 @@ Made by hand.
 
 The Rail family is TIG-welded by hand from 25CrMo4 Reynolds and Columbus tubing. The tubes are carefully selected for the locations and loads of each model. Machined parts are made in a town near lake Zurich. Dropouts follow the UDH standard. Every frame is cathodic dip-coated and then powder-coated for ultimate protection against corrosion and wear. The bottom bracket is engraved with serial number and your name. Give me your favourite RAL code of your choice for the powder coating.
 
-ROM prices are for the finished, coated and machined frame, excluding VAT.
+ROM prices are for the finished, coated and machined frame.
 
 [Truischjanid](https://railcycles.ch/en/models#truischjanid)[Lopper](https://railcycles.ch/en/models#lopper)[Muetterschwandeberg](https://railcycles.ch/en/models#muetterschwandenberg)[Wichelsee](https://railcycles.ch/en/models#wichelsee)
 
@@ -32,7 +32,7 @@ A hardtail for your next enduro race, you don’t dare - do you?
 
 ROM price: CHF 2’500
 
-ROM prices are for the finished, coated and machined frame, excluding VAT.
+ROM prices are for the finished, coated and machined frame.
 
 [Enquire about this model ](https://railcycles.ch/en/contact.html?model=truischjanid)
 
@@ -62,7 +62,7 @@ An enduro trail bike that’s also happy to compete in the occasional enduro rac
 
 ROM price: CHF 3’100
 
-ROM prices are for the finished, coated and machined frame, excluding VAT.
+ROM prices are for the finished, coated and machined frame.
 
 [Enquire about this model ](https://railcycles.ch/en/contact.html?model=lopper)
 
@@ -92,7 +92,7 @@ A trail and down-country bike with an incredibly wide range of use. From the win
 
 ROM price: CHF 3’100
 
-ROM prices are for the finished, coated and machined frame, excluding rear shock and VAT.
+ROM prices are for the finished, coated and machined frame, excluding rear shock.
 
 [Enquire about this model ](https://railcycles.ch/en/contact.html?model=muetterschwandenberg)
 
@@ -111,7 +111,7 @@ Classic, delicate, durable, a calm soul
 
 ROM price: CHF 2’500
 
-ROM prices are for the finished, coated and machined frame, excluding VAT.
+ROM prices are for the finished, coated and machined frame.
 
 [Enquire about this model ](https://railcycles.ch/en/contact.html?model=wichelsee)
 
